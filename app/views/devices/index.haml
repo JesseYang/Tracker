@@ -9,7 +9,7 @@
         %tr
           %th 名称
           %th IMEI号
-          %th 删除
+          %th 操作
           %th
         - @devices.each do |d|
           %tr
@@ -18,6 +18,7 @@
             %td
               = link_to "删除", { controller: "devices", action: "destroy", id: d._id.to_s }, :method => "delete", :class => 'btn btn-mini btn-danger' 
               = link_to "地图显示日志", { controller: "devices", action: "show_map", id: d._id.to_s }, :class => 'btn btn-mini'
+              = link_to "查看日志列表", { controller: "logs", action: "index", device_id: d._id.to_s }, :class => 'btn btn-mini'
       %a{href: "#newDevice", role: "button", class: "btn", "data-toggle" => "modal"} 新设备
 
 #newDevice.modal.hide.fade

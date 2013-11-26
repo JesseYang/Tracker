@@ -14,8 +14,8 @@ class DevicesController < ApplicationController
       @zoom = 8
     else
       @center = @device.log_center
-      @start = [@logs[0].latitude, @logs[0].longitude]
-      @end = [@logs[-1].latitude, @logs[-1].longitude]
+      @start = [@logs[0].lat_mars, @logs[0].lng_mars]
+      @end = [@logs[-1].lat_mars, @logs[-1].lng_mars]
       @zoom = @device.log_zoom
     end
     @devices = current_user.devices

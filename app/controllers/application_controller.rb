@@ -14,4 +14,12 @@ class ApplicationController < ActionController::Base
   def user_sign_in?
   	current_user.present?
   end
+
+  def render_404
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
+  def render_500
+    raise '500 exception'
+  end
 end

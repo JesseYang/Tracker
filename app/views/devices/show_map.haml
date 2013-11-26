@@ -7,7 +7,7 @@
     window.start = '#{@start.to_a.join(',')}'
     window.end = '#{@end.to_a.join(',')}'
     window.zoom = '#{@zoom}'
-    window.logs = '#{(@logs.map { |l| l.latitude.to_s + ',' + l.longitude.to_s }).join('-')}'
+    window.logs = '#{(@logs.map { |l| l.lat_mars.to_s + ',' + l.lng_mars.to_s }).join('-')}'
 
 #container
 .input_area

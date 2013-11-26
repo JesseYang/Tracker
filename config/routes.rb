@@ -7,8 +7,12 @@ Tracker::Application.routes.draw do
       get :show_map
     end
   end
+  resources :logs do
+    collection do
+      post :device_create
+    end
+  end
 
-  resources :logs
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

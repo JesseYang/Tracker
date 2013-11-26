@@ -1,16 +1,20 @@
-- if @logs.blank? 
-  %p 无日志 
-- else
-  %table
-    %tr 
-      %th 经度
-      %th 纬度
-      %th 产生时间
-    - @logs.each do |l|
-      %tr               
-        %td= l.longitude
-        %td= l.latitude
-        %td= Time.at(l.generated_at).strftime("%Y年%m月%d日%H时%M分%S秒")
+.container
+  .span6.offset3
+    - if @logs.blank? 
+      %h4
+        没有日志,
+        =link_to "创建一条", {controller: "logs", action: "new", device_id: @device._id.to_s}
+    - else
+      %table{class: "table"}
+        %tr 
+          %th 经度
+          %th 纬度
+          %th 产生时间
+        - @logs.each do |l|
+          %tr               
+            %td= l.lng
+            %td= l.lat
+            %td= Time.at(l.generated_at).strftime("%Y年%m月%d日%H时%M分%S秒")
 
-= link_to "返回设备列表", {controller: "devices", action: "index"}
-= link_to "创建日志", {controller: "logs", action: "new", device_id: @device._id.to_s}
+      = link_to "返回设备列表", {controller: "devices", action: "index"}, :class => 'btn btn-mini'
+    = link_to "创建日志", {controller: "logs", action: "new", device_id: @device._id.to_s}, :class => 'btn btn-mini'
