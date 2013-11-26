@@ -16,5 +16,5 @@
             %td= l.lat
             %td= Time.at(l.generated_at).strftime("%Y年%m月%d日%H时%M分%S秒")
 
-      = link_to "返回设备列表", {controller: "devices", action: "index"}, :class => 'btn btn-mini'
-    = link_to "创建日志", {controller: "logs", action: "new", device_id: @device._id.to_s}, :class => 'btn btn-mini'
+      = link_to "创建日志", {controller: "logs", action: "new", device_id: @device._id.to_s}, :class => 'btn btn-mini'
+    = link_to "返回设备列表", {controller: "devices", action: "index"}, :class => 'btn btn-mini'
