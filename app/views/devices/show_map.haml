@@ -1,0 +1,19 @@
+- content_for :app_head do
+  = javascript_include_tag "http://map.soso.com/api/v2/main.js"
+  = javascript_include_tag "pages/devices-bundle"
+  = stylesheet_link_tag "pages/devices-bundle", :media => "all"
+  :javascript
+    window.center = ['#{@center[0]}', '#{@center[1]}']
+    window.start = '#{@start.to_a.join(',')}'
+    window.end = '#{@end.to_a.join(',')}'
+    window.zoom = '#{@zoom}'
+    window.logs = '#{(@logs.map { |l| l.latitude.to_s + ',' + l.longitude.to_s }).join('-')}'
+
+#container
+.input_area
+  = form_tag({controller: "devices", action: "show_map"}, method: "get") do
+    .control-group
+      = label_tag :name, "选择设备"
+      .controls
+        = select_tag :id, options_from_collection_for_select(@devices, "id", "name", @device.id)
+      = submit_tag "确定"

@@ -1,0 +1,42 @@
+.container
+  .span6.offset3
+    - if @devices.blank?
+      %h4
+        没有设备,
+        %a{href: "#newDevice", "data-toggle" => "modal"} 创建一个
+    - else
+      %table{class: "table"}
+        %tr
+          %th 名称
+          %th IMEI号
+          %th 删除
+          %th
+        - @devices.each do |d|
+          %tr
+            %td= d.name
+            %td= d.imei.to_s
+            %td
+              = link_to "删除", { controller: "devices", action: "destroy", id: d._id.to_s }, :method => "delete", :class => 'btn btn-mini btn-danger' 
+              = link_to "地图显示日志", { controller: "devices", action: "show_map", id: d._id.to_s }, :class => 'btn btn-mini'
+      %a{href: "#newDevice", role: "button", class: "btn", "data-toggle" => "modal"} 新设备
+
+#newDevice.modal.hide.fade
+  = form_tag('/devices', method: "post", class: "form-horizontal") do
+    .modal-header
+      %button{type: "button", class: "close", "data-dismiss" => "modal", "aria-hidden" => "true"} &times;
+      %h3 录入新设备
+    .modal-body
+      .control-group
+        = label_tag :name, "名称", :class => 'control-label'
+        .controls
+          = text_field_tag "device[name]", "", :autofocus => true
+      .control-group
+        = label_tag :imei, "imei号", :class => 'control-label'
+        .controls
+          = text_field_tag "device[imei]", ""
+      .control-group{style: "display:none;"}
+        = text_field_tag "device[user_id]", @current_user._id.to_s
+    .modal-footer
+      %a{href: "#", class: "btn", "data-dismiss" => "modal", "aria-hidden" => "true"} 取消
+      = submit_tag "创建", :class => 'btn-primary btn'
+

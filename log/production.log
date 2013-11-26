@@ -1,0 +1,215 @@
+Started GET "/" for 127.0.0.1 at 2013-10-22 09:48:38 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.haml within layouts/application (10.8ms)
+Completed 500 Internal Server Error in 220ms
+
+ActionView::Template::Error (application.css isn't precompiled):
+    2: %html
+    3:   %head
+    4:     %title Tracker
+    5:     = stylesheet_link_tag "application", :media => "all"
+    6:     = javascript_include_tag "application"
+    7:     = yield :app_head
+    8:     = csrf_meta_tags
+  app/views/layouts/application.haml:5:in `_app_views_layouts_application_haml___618086436448282293_21218080'
+
+
+Compiled jquery.js  (2ms)  (pid 8679)
+Compiled jquery_ujs.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-transition.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-alert.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-modal.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-dropdown.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-scrollspy.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-tab.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-tooltip.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-popover.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-button.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-collapse.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-carousel.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-typeahead.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-affix.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap.js  (242ms)  (pid 8679)
+Compiled application.js  (651ms)  (pid 8679)
+Compiled bootstrap_and_overrides.css  (7514ms)  (pid 8679)
+Compiled devices.css  (747ms)  (pid 8679)
+Compiled logs.css  (1ms)  (pid 8679)
+Compiled pages/devices-bundle.css  (6ms)  (pid 8679)
+Compiled welcome.css  (1ms)  (pid 8679)
+Compiled application.css  (8541ms)  (pid 8679)
+Compiled jquery.js  (1ms)  (pid 8679)
+Compiled jquery_ujs.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-transition.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-alert.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-modal.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-dropdown.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-scrollspy.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-tab.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-tooltip.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-popover.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-button.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-collapse.js  (45ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-carousel.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-typeahead.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap/bootstrap-affix.js  (0ms)  (pid 8679)
+Compiled twitter/bootstrap.js  (481ms)  (pid 8679)
+Compiled application.js  (574ms)  (pid 8679)
+Compiled bootstrap_and_overrides.css  (5299ms)  (pid 8679)
+Compiled devices.css  (261ms)  (pid 8679)
+Compiled logs.css  (1ms)  (pid 8679)
+Compiled pages/devices-bundle.css  (5ms)  (pid 8679)
+Compiled welcome.css  (59ms)  (pid 8679)
+Compiled application.css  (5679ms)  (pid 8679)
+Started GET "/" for 127.0.0.1 at 2013-10-22 10:03:52 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.haml within layouts/application (10.7ms)
+Completed 200 OK in 178ms (Views: 126.5ms)
+Started GET "/" for 127.0.0.1 at 2013-10-22 10:20:52 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.haml within layouts/application (10.8ms)
+Completed 200 OK in 107ms (Views: 68.5ms)
+Started GET "/users/sign_up" for 127.0.0.1 at 2013-10-22 10:29:22 +0800
+Processing by RegistrationsController#new as HTML
+  Rendered devise/registrations/new.haml within layouts/application (5.8ms)
+Completed 200 OK in 57ms (Views: 56.5ms)
+Started GET "/" for 127.0.0.1 at 2013-10-22 10:29:32 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.haml within layouts/application (2.5ms)
+Completed 200 OK in 6ms (Views: 5.3ms)
+Started GET "/" for 127.0.0.1 at 2013-10-22 10:31:03 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.haml within layouts/application (2.6ms)
+Completed 200 OK in 6ms (Views: 5.7ms)
+Started GET "/" for 127.0.0.1 at 2013-10-22 10:31:08 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.haml within layouts/application (2.5ms)
+Completed 200 OK in 8ms (Views: 7.4ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2013-10-22 10:31:16 +0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xzbfdp7Epw8M8vPZIrw2GdhJuvb2YJ/crAdoLLnRDkw=", "user"=>{"email"=>"yangzexi@126.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"登录"}
+Completed 401 Unauthorized in 388ms
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xzbfdp7Epw8M8vPZIrw2GdhJuvb2YJ/crAdoLLnRDkw=", "user"=>{"email"=>"yangzexi@126.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"登录"}
+  Rendered devise/sessions/new.haml within layouts/application (2.7ms)
+Completed 200 OK in 116ms (Views: 5.5ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2013-10-22 10:31:24 +0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xzbfdp7Epw8M8vPZIrw2GdhJuvb2YJ/crAdoLLnRDkw=", "user"=>{"email"=>"jesse.yang1985@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"登录"}
+Completed 401 Unauthorized in 36ms
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xzbfdp7Epw8M8vPZIrw2GdhJuvb2YJ/crAdoLLnRDkw=", "user"=>{"email"=>"jesse.yang1985@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"登录"}
+  Rendered devise/sessions/new.haml within layouts/application (2.2ms)
+Completed 200 OK in 90ms (Views: 4.7ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2013-10-22 10:31:30 +0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wNuPZiJXACWQAzJ8mP7kUCpTfWIHtnC0qNWlXjdr6WQ=", "user"=>{"email"=>"yangzexi@126.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"登录"}
+WARNING: Can't verify CSRF token authenticity
+Completed 401 Unauthorized in 2ms
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wNuPZiJXACWQAzJ8mP7kUCpTfWIHtnC0qNWlXjdr6WQ=", "user"=>{"email"=>"yangzexi@126.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"登录"}
+WARNING: Can't verify CSRF token authenticity
+  Rendered devise/sessions/new.haml within layouts/application (2.1ms)
+Completed 200 OK in 92ms (Views: 6.1ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2013-10-22 10:31:35 +0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LPrwMtDsFNHb5lPwODjQ5kezp260ee3X2n5pRvodB0Q=", "user"=>{"email"=>"yangzexi@126.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"登录"}
+Completed 401 Unauthorized in 2ms
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LPrwMtDsFNHb5lPwODjQ5kezp260ee3X2n5pRvodB0Q=", "user"=>{"email"=>"yangzexi@126.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"登录"}
+  Rendered devise/sessions/new.haml within layouts/application (2.1ms)
+Completed 200 OK in 90ms (Views: 4.4ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2013-10-22 10:31:40 +0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LPrwMtDsFNHb5lPwODjQ5kezp260ee3X2n5pRvodB0Q=", "user"=>{"email"=>"jesse.yang1985@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"登录"}
+Completed 401 Unauthorized in 2ms
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LPrwMtDsFNHb5lPwODjQ5kezp260ee3X2n5pRvodB0Q=", "user"=>{"email"=>"jesse.yang1985@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"登录"}
+  Rendered devise/sessions/new.haml within layouts/application (2.0ms)
+Completed 200 OK in 90ms (Views: 4.3ms)
+Started GET "/users/sign_up" for 127.0.0.1 at 2013-10-22 10:31:50 +0800
+Processing by RegistrationsController#new as HTML
+  Rendered devise/registrations/new.haml within layouts/application (1.9ms)
+Completed 200 OK in 5ms (Views: 4.5ms)
+Started POST "/users" for 127.0.0.1 at 2013-10-22 10:32:01 +0800
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LPrwMtDsFNHb5lPwODjQ5kezp260ee3X2n5pRvodB0Q=", "user"=>{"email"=>"yangzexi@126.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"注册"}
+  Rendered devise/registrations/new.haml within layouts/application (2.1ms)
+Completed 200 OK in 375ms (Views: 5.0ms)
+Started POST "/users" for 127.0.0.1 at 2013-10-22 10:32:11 +0800
+Processing by RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LPrwMtDsFNHb5lPwODjQ5kezp260ee3X2n5pRvodB0Q=", "user"=>{"email"=>"jesse.yang1985@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"注册"}
+  Rendered devise/registrations/new.haml within layouts/application (2.0ms)
+Completed 200 OK in 94ms (Views: 4.6ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2013-10-22 10:33:45 +0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xzbfdp7Epw8M8vPZIrw2GdhJuvb2YJ/crAdoLLnRDkw=", "user"=>{"email"=>"yangzexi@126.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"登录"}
+WARNING: Can't verify CSRF token authenticity
+Redirected to https://localhost/devices
+Completed 302 Found in 389ms
+Started GET "/devices" for 127.0.0.1 at 2013-10-22 10:33:46 +0800
+Processing by DevicesController#index as HTML
+Redirected to https://localhost/
+Filter chain halted as :require_sign_in rendered or redirected
+Completed 302 Found in 1ms
+Started GET "/" for 127.0.0.1 at 2013-10-22 10:33:46 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.haml within layouts/application (47.1ms)
+Completed 200 OK in 63ms (Views: 59.0ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2013-10-22 10:33:57 +0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wtjwVa/Xvo2q1mQU8GOZePAh8FpsJVCT391/1BRrzBo=", "user"=>{"email"=>"yangzexi@126.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"登录"}
+Redirected to https://localhost/devices
+Completed 302 Found in 89ms
+Started GET "/devices" for 127.0.0.1 at 2013-10-22 10:33:57 +0800
+Processing by DevicesController#index as HTML
+  Rendered devices/index.haml within layouts/application (32.6ms)
+Completed 200 OK in 83ms (Views: 79.7ms)
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2013-10-22 10:34:04 +0800
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"wtjwVa/Xvo2q1mQU8GOZePAh8FpsJVCT391/1BRrzBo="}
+Redirected to https://localhost/
+Completed 302 Found in 47ms
+Started GET "/" for 127.0.0.1 at 2013-10-22 10:34:04 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.haml within layouts/application (2.2ms)
+Completed 200 OK in 5ms (Views: 4.7ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2013-10-22 10:34:12 +0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5vHiJUv6x63m3/1Z0oQDkyEgrd0vfbWYGUewvjLEtg8=", "user"=>{"email"=>"yangzexi@126.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"登录"}
+Redirected to https://localhost/devices
+Completed 302 Found in 91ms
+Started GET "/devices" for 127.0.0.1 at 2013-10-22 10:34:12 +0800
+Processing by DevicesController#index as HTML
+  Rendered devices/index.haml within layouts/application (4.8ms)
+Completed 200 OK in 10ms (Views: 7.6ms)
+Started GET "/" for 127.0.0.1 at 2013-10-22 10:34:18 +0800
+Processing by Devise::SessionsController#new as HTML
+Redirected to http://localhost/devices
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 2ms
+Started GET "/devices" for 127.0.0.1 at 2013-10-22 10:34:18 +0800
+Processing by DevicesController#index as HTML
+  Rendered devices/index.haml within layouts/application (5.7ms)
+Completed 200 OK in 10ms (Views: 8.3ms)
+Started GET "/devices" for 127.0.0.1 at 2013-10-22 10:34:24 +0800
+Processing by DevicesController#index as HTML
+  Rendered devices/index.haml within layouts/application (5.5ms)
+Completed 200 OK in 10ms (Views: 8.2ms)
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2013-10-22 10:48:15 +0800
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"5vHiJUv6x63m3/1Z0oQDkyEgrd0vfbWYGUewvjLEtg8="}
+Redirected to https://localhost/
+Completed 302 Found in 3ms
+Started GET "/" for 127.0.0.1 at 2013-10-22 10:48:15 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.haml within layouts/application (2.4ms)
+Completed 200 OK in 7ms (Views: 6.3ms)
+Started POST "/users/sign_in" for 127.0.0.1 at 2013-10-22 10:48:25 +0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"l/+PgIBTFTY+++c6TtxrVyhEvWxgAHzGdkUNnLP/hFQ=", "user"=>{"email"=>"yangzexi@126.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"登录"}
+Redirected to https://localhost/devices
+Completed 302 Found in 89ms
+Started GET "/devices" for 127.0.0.1 at 2013-10-22 10:48:26 +0800
+Processing by DevicesController#index as HTML
+  Rendered devices/index.haml within layouts/application (4.7ms)
+Completed 200 OK in 9ms (Views: 7.4ms)

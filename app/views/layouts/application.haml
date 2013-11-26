@@ -1,0 +1,49 @@
+!!!
+%html
+  %head
+    %title Tracker
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+    = yield :app_head
+    = csrf_meta_tags
+  %body
+    .navbar
+      .navbar-inner
+        %a.brand{href: "/devices"} Tracker
+        %ul.nav
+          - if user_signed_in?
+            %li.divider-vertical
+            %li.active
+              %a{href: "/devices"} 设备列表
+          %li.divider-vertical
+          %li
+            %a{href: "#"} 关于我们
+          %li.divider-vertical
+          %li
+            %a{href: "#"} 联系我们
+        - if user_signed_in?
+          %ul.nav.pull-right
+            %li.dropdown
+              %a.dropdown-toggle{href: "#", "data-toggle" => "dropdown"}
+                = current_user.email
+                %b.caret
+              %ul.dropdown-menu
+                %li
+                  %a{href: "/users/sign_out", "data-method" => "delete", rel: "nofollow"} 退出
+        - else
+          %ul.nav.pull-right
+            %li.dropdown
+              %a.dropdown-toggle{href: "#{}", "data-toggle" => "dropdown"}
+                Account
+                %b.caret
+              %ul.dropdown-menu
+                %li
+                  %a{href: "/users/sign_in"} 登录
+                %li
+                  %a{href: "/users/sign_up"} 注册
+    .container
+      - flash.each do |name, msg|
+        %div{:class => "alert alert-#{ name == :notice ? "success" : "error" }"}
+          %button{type: "button", class: "close", "data-dismiss" => "alert"} &times;
+          = msg
+    = yield

@@ -1,0 +1,17 @@
+= form_for(@log, url: {action: 'create'}) do |l|
+  %p
+    = l.label :latitude, "纬度"
+    = l.text_field :latitude
+  %p
+    = l.label :longitude, "经度"
+    = l.text_field :longitude
+  %p
+    = l.label :generated_at, "生成时间"
+    = l.date_select :generated_at
+  %p.hide
+    = l.label :device_id
+    = l.text_field :device_id, value: @device._id.to_s
+  %p
+    = l.submit "创建"
+
+= link_to '返回日志列表', {action: 'index', device_id: @device._id.to_s}
