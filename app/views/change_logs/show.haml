@@ -1,4 +1,4 @@
 .container
   .span6.offset3
     %h4= @change_log.title
-    %p= @change_log.content
+    %p= @change_log.content.gsub('/\r\n/', '<br />')
