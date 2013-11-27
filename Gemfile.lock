@@ -39,6 +39,7 @@ GEM
     celluloid (0.12.4)
       facter (>= 1.6.12)
       timers (>= 1.0.0)
+    chronic (0.10.2)
     coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -62,6 +63,9 @@ GEM
     haml (4.0.0)
       tilt
     hike (1.2.3)
+    httparty (0.10.2)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
     i18n (0.6.4)
     journey (1.0.4)
     jquery-rails (3.0.4)
@@ -87,6 +91,7 @@ GEM
       tzinfo (~> 0.3.22)
     moped (1.5.0)
     multi_json (1.7.7)
+    multi_xml (0.5.5)
     nokogiri (1.5.10)
     origin (1.1.0)
     orm_adapter (0.4.0)
@@ -163,6 +168,9 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.3)
       rack (>= 1.0)
+    whenever (0.8.4)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -173,6 +181,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise (~> 3.0.0)
   haml (~> 4.0.0)
+  httparty (~> 0.10.2)
   jquery-rails (~> 3.0.4)
   less-rails (~> 2.4.2)
   libv8 (~> 3.16.14.3)
@@ -185,3 +194,4 @@ DEPENDENCIES
   therubyracer
   twitter-bootstrap-rails (~> 2.2.8)
   uglifier (>= 1.0.3)
+  whenever (~> 0.8.2)

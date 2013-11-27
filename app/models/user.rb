@@ -38,5 +38,7 @@ class User
   ## Token authenticatable
   # field :authentication_token, :type => String
 
+  field :admin, :type => Boolean, :default => false
+
   has_many :devices
 end

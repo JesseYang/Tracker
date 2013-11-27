@@ -13,6 +13,9 @@ Tracker::Application.routes.draw do
     end
   end
 
+  resources :change_logs
+  resources :feedbacks
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
