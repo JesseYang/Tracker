@@ -13,3 +13,5 @@ Gemfile.lock
 public/uploads/*
 public/uploads/avatar/*
 public/assets/*
+lib/bs_db_csv
+lib/bs_db_xml
