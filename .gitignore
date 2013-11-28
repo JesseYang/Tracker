@@ -15,3 +15,4 @@ public/uploads/avatar/*
 public/assets/*
 lib/bs_db_csv
 lib/bs_db_xml
+public/production.log
