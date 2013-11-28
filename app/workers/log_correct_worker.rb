@@ -1,5 +1,6 @@
 class LogCorrectWorker
   include Sidekiq::Worker
+  sidekiq_options :retry => 10, :queue => "tracker_#{Rails.env}".to_sym
 
   def perform(log_id, latitude, longitude)
     log = Log.find(log_id)

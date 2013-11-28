@@ -1,5 +1,6 @@
 class ImportWorker
   include Sidekiq::Worker
+  sidekiq_options :retry => 10, :queue => "tracker_#{Rails.env}".to_sym
 
   def perform(type, file_number)
     if type == "xml"

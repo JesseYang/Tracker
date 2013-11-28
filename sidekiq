@@ -40,7 +40,7 @@ start)
 		echo "You need to first stop the sidekiq process, or remove the pid file if you can confirm no sidekiq process is running."
 		exit
 	fi
-	bundle exec sidekiq -C config/sidekiq.yml -q oopsdata_$ENVIRONMENT -e $ENVIRONMENT -d
+	bundle exec sidekiq -C config/sidekiq.yml -q tracker_$ENVIRONMENT -e $ENVIRONMENT -d
 	;;
 stop)
 	if [ $pid_file_exist = 0 ]; then
@@ -57,6 +57,6 @@ restart)
 	else
 		bundle exec sidekiqctl stop tmp/pids/sidekiq.pid 60
 	fi
-	bundle exec sidekiq -C config/sidekiq.yml -q oopsdata_$ENVIRONMENT -e $ENVIRONMENT -d
+	bundle exec sidekiq -C config/sidekiq.yml -q tracker_$ENVIRONMENT -e $ENVIRONMENT -d
 	;;
 esac
