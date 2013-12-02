@@ -23,7 +23,7 @@ class Offset
   end
 
   def self.correct(latitude, longitude)
-    record = self.where(lng: longitude, lat: latitude)
+    record = self.where(lng: longitude.round(2), lat: latitude.round(2)).first
     return [latitude, longitude] if record.blank?
     return [latitude + record.offset_lat, longitude + record.offset_lng]
   end
