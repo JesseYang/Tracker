@@ -6,7 +6,14 @@ class Log
   field :lng, :type => Float
   field :lat_mars, :type => Float
   field :lng_mars, :type => Float
-  field :bs_ss, :type => Hash, default: {}
+  # each element of bs_ss corresponds to one bs, and is a hash, the keys of which are:
+  #   mcc:
+  #   mnc:
+  #   lac:
+  #   cellid:
+  #   ss:
+  # the former four can identify at most one bs
+  field :bs_ss, :type => Array
   field :generated_at, :type => Integer
 
   belongs_to :device
@@ -14,10 +21,10 @@ class Log
   def cal_bs_based_loc
     return if bs_array.blank?
     bs_ary = []
-    bs_id_ary.each do |bs_id, ss|
-      bs = BaseStation.where(uniq_id: bs_id)
+    bs_ss.each do |bs_info|
+      bs = BaseStation.where(mcc: bs_info[:mcc], mnc: bs_info[:mnc], lac: bs_info[:lac], cellid: bs_info[:cellid])
       next if bs.blank?
-      bs_ary << {lat: bs.lat_offset.to_f, lng: bs.lng_offset.to_f, ss: ss.to_f}
+      bs_ary << {lat: bs.lat_offset.to_f, lng: bs.lng_offset.to_f, ss: bs_info[:ss].to_f}
     end
     lat_mars_sum = 0 
     lng_mars_sum = 0

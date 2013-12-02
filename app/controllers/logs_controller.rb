@@ -47,10 +47,10 @@ class LogsController < ApplicationController
       :value => "Device Not Found"
     } and return if device.nil?
     bs_ary = params[:bs_ss].split('&')
-    bs_ss = {}
+    bs_ss = []
     bs_ary.each do |bs|
-      temp = bs.split(':')
-      bs_ss[temp[0]] = temp[1].to_f
+      temp = bs.split(',')
+      bs_ss << {mcc: temp[0], mnc: temp[1], lac: temp[2], cellid: temp[3], ss: temp[4]}
     end
     log = Log.create(bs_ss: bs_ss,
       generated_at: Time.now.to_i)
