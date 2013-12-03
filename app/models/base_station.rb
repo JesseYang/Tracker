@@ -18,12 +18,13 @@ class BaseStation
   def self.import_xml(file_number)
     tot_number = 0
     1.upto(file_number).each do |num|
+      next if !File.exist?("lib/bs_db_xml/d#{num.to_s}.xml")
       xml = Nokogiri::XML(File.read("lib/bs_db_xml/d#{num.to_s}.xml"))
       xml.xpath('//cellsdata').each do |cell_data|
         tot_number += 1
         puts tot_number if tot_number%1000 == 0
         uniq_id = cell_data.xpath(".//idcells")[0].text.to_i
-        next if BaseStation.where(uniq_id: uniq_id).present?
+        # next if BaseStation.where(uniq_id: uniq_id).present?
         lat = cell_data.xpath("lat")[0].text.to_f
         lng = cell_data.xpath("lon")[0].text.to_f
         lat_offset = cell_data.xpath("offsetlat")[0].text.to_f
@@ -36,6 +37,7 @@ class BaseStation
   def self.import_csv(file_number)
     tot_number = 0
     1.upto(file_number).each do |num|
+      next if !File.exist?("lib/bs_db_csv/d#{num.to_s}.csv")
       content = File.read("lib/bs_db_csv/d#{num.to_s}.csv")
       CSV.parse(content) do |row|
         tot_number += 1
