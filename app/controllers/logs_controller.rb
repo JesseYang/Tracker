@@ -39,4 +39,26 @@ class LogsController < ApplicationController
       :value => ""
     } and return
   end
+ 
+  def device_create_bs
+    device = Device.where(imei: params[:imei]).first
+    render :json => {
+      :success => false,
+      :value => "Device Not Found"
+    } and return if device.nil?
+    bs_ary = params[:bs_ss].split('&')
+    bs_ss = []
+    bs_ary.each do |bs|
+      temp = bs.split(',')
+      bs_ss << {mcc: temp[0], mnc: temp[1], lac: temp[2], cellid: temp[3], ss: temp[4]}
+    end
+    log = Log.create(bs_ss: bs_ss,
+      generated_at: Time.now.to_i)
+    LogBsWorker.perform_async(log.id)
+    device.logs << log
+    render :json => {
+      :success => true,
+      :value => ""
+    } and return
+  end
 end

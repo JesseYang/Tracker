@@ -9,6 +9,7 @@ class DevicesController < ApplicationController
   def show_map
     @device = Device.find_by_id(params[:id])
     @logs = @device.logs.asc(:created_at)
+    @logs = @logs.select { |e| e.lat_mars.present? && e.lng_mars.present? }
     if @logs.blank?
       @center = [39.916527,116.397128]
       @zoom = 8

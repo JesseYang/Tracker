@@ -6,6 +6,8 @@ class Offset
   field :offset_lng, :type => Float
   field :offset_lat, :type => Float
 
+  index({ lng: 1, lat: 1 }, { background: true })
+
   def self.import_data
     total_number = 0
     1.upto(10).each do |file_index|
