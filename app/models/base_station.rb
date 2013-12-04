@@ -46,11 +46,11 @@ class BaseStation
     1.upto(file_number).each do |num|
       next if !File.exist?("lib/bs_db_csv/d#{num.to_s}.csv")
       content = File.read("lib/bs_db_csv/d#{num.to_s}.csv")
-      CSV.parse(content) do |row|
+      CSV.parse(content.encode('utf-8', 'gbk')) do |row|
         tot_number += 1
         puts tot_number if tot_number%1000 == 0
         uniq_id = row[0].to_i
-        bs = BaseStation.where(uniq_id: uniq_id)
+        bs = BaseStation.where(uniq_id: uniq_id).first
         next if bs.nil?
         bs.description = row[10]
         bs.mcc = row[1]
