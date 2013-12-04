@@ -20,7 +20,8 @@ class BaseStation
   field :radius, :type => Integer
   field :description, :type => String
 
-  index({uniq_id: 1})
+  index({ uniq_id: 1 }, { background: true })
+  index({ mcc: 1, mnc: 1, lac: 1, cellid: 1 })
 
   def self.import_xml(file_number)
     tot_number = 0
