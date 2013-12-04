@@ -21,7 +21,6 @@ class BaseStation
   field :description, :type => String
 
   index({uniq_id: 1})
-  index({cellid: 1})
 
   def self.import_xml(file_number)
     tot_number = 0
