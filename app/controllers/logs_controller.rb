@@ -50,7 +50,8 @@ class LogsController < ApplicationController
     bs_ss = []
     bs_ary.each do |bs|
       temp = bs.split(',')
-      bs_ss << {mcc: temp[0], mnc: temp[1], lac: temp[2], cellid: temp[3], ss: temp[4]}
+      next if temp[4] == 0
+      bs_ss << {mcc: temp[0].to_i, mnc: temp[1].to_i, lac: temp[2].to_i, cellid: temp[3].to_i, ss: temp[4].to_f}
     end
     log = Log.create(bs_ss: bs_ss,
       generated_at: Time.now.to_i)

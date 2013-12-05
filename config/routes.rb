@@ -10,6 +10,7 @@ Tracker::Application.routes.draw do
   resources :logs do
     collection do
       post :device_create
+      post :device_create_bs
     end
   end
 
