@@ -21,14 +21,14 @@ class Device
   end
 
   def log_center
-    latitude_ary = self.logs.map { |e| e.lat_mars }
-    longitude_ary = self.logs.map { |e| e.lng_mars }
+    latitude_ary = self.logs.map { |e| e.lat_offset }
+    longitude_ary = self.logs.map { |e| e.lng_offset }
     return [latitude_ary.mean, longitude_ary.mean]
   end
 
   def log_zoom
-    latitude_ary = self.logs.map { |e| e.lat_mars }
-    longitude_ary = self.logs.map { |e| e.lng_mars }
+    latitude_ary = self.logs.map { |e| e.lat_offset }
+    longitude_ary = self.logs.map { |e| e.lng_offset }
     latitude_diff = latitude_ary.max - latitude_ary.min
     longitude_diff = longitude_ary.max - longitude_ary.min
     zoom = []

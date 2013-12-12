@@ -4,7 +4,7 @@ class LogCorrectWorker
 
   def perform(log_id)
     log = Log.find(log_id)
-    lat_mars, lng_mars = *Offset.correct(log.lat.to_f, log.lng.to_f)
-    log.update_attributes({ lat_mars: lat_mars, lng_mars: lng_mars })
+    lat_offset, lng_offset = *Offset.correct(log.lat.to_f, log.lng.to_f)
+    log.update_attributes({ lat_offset: lat_offset, lng_offset: lng_offset })
   end
 end

@@ -83,12 +83,14 @@ class BaseStation
         :headers => { 'Content-Type' => 'application/json;charset=UTF-8' } })
     puts result.parsed_response
     result = result.parsed_response
-    return nil if result["cause"] != "OK"
     bs = BaseStation.where(mcc: bs_info["mcc"], mnc: bs_info["mnc"], lac: bs_info["lac"], cellid: bs_info["cellid"]).first
+    return bs if result["cause"] != "OK"
     bs = BaseStation.create(mcc: bs_info["mcc"], mnc: bs_info["mnc"], lac: bs_info["lac"], cellid: bs_info["cellid"]) if bs.nil?
     bs.lat_api = result["lat"].to_f
     bs.lng_api = result["lng"].to_f
-    bs.lat_offset, bs.lng_offset = *Offset.correct(bs.lat_api, log.lng_api)
+    [lat_offset, lng_offset] = Offset.correct(bs.lat_api, log.lng_api)
+    bs.lat_offset = lat_offset
+    bs.lng_offset = lng_offset
     bs.save
     return bs
   end

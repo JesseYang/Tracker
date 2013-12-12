@@ -13,8 +13,8 @@ class LogsController < ApplicationController
 
   def create
     log = Log.create(params[:log])
-    log.lat_mars = log.lat
-    log.lng_mars = log.lng
+    log.lat_offset = log.lat
+    log.lng_offset = log.lng
     log.generated_at = Time.now.to_i
     log.save
     LogCorrectWorker.perform_async(log.id)
@@ -30,8 +30,8 @@ class LogsController < ApplicationController
     log = Log.create(
       lat: params[:lat].to_f,
       lng: params[:lng].to_f,
-      lat_mars: params[:lat].to_f,
-      lng_mars: params[:lng].to_f,
+      lat_offset: params[:lat].to_f,
+      lng_offset: params[:lng].to_f,
       generated_at: Time.now.to_i)
     device.logs << log
     LogCorrectWorker.perform_async(log.id)

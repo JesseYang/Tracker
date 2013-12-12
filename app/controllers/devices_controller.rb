@@ -9,14 +9,14 @@ class DevicesController < ApplicationController
   def show_map
     @device = Device.find_by_id(params[:id])
     @logs = @device.logs.asc(:created_at)
-    @logs = @logs.select { |e| e.lat_mars.present? && e.lng_mars.present? }
+    @logs = @logs.select { |e| e.lat_offset.present? && e.lng_offset.present? }
     if @logs.blank?
       @center = [39.916527,116.397128]
       @zoom = 8
     else
       @center = @device.log_center
-      @start = [@logs[0].lat_mars, @logs[0].lng_mars]
-      @end = [@logs[-1].lat_mars, @logs[-1].lng_mars]
+      @start = [@logs[0].lat_offset, @logs[0].lng_offset]
+      @end = [@logs[-1].lat_offset, @logs[-1].lng_offset]
       @zoom = @device.log_zoom
     end
     @devices = current_user.devices
