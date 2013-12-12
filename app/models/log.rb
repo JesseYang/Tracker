@@ -1,10 +1,6 @@
 class Log
   include Mongoid::Document
   include Mongoid::Timestamps
-  include HTTParty
-
-  base_uri 'http://www.minigps.net'
-  format :json
 
   field :lat, :type => Float
   field :lng, :type => Float
@@ -26,16 +22,12 @@ class Log
     return if bs_ss.blank?
     bs_ary = []
     bs_ss.each do |bs_info|
-      bs = BaseStation.where(mcc: bs_info["mcc"], mnc: bs_info["mnc"], lac: bs_info["lac"], cellid: bs_info["cellid"]).first
-      if bs.blank?
-        bs = self.create_bs_by_api(bs_info)
-        next if bs.blank?
-      end
+      bs = BaseStation.find_bs_by_info(bs_info)
       bs_ary << {
-        lat: bs.lat.to_f,
-        lng: bs.lng.to_f,
-        lat_mars: bs.lat_offset.to_f,
-        lng_mars: bs.lng_offset.to_f,
+        lat: bs.lat_std,
+        lng: bs.lng_std,
+        lat_mars: bs.lat_offset,
+        lng_mars: bs.lng_offset,
         ss: bs_info["ss"].to_f}
     end
     lat_mars_sum = lng_mars_sum = lat_sum = lng_sum = ss_sum = 0 
@@ -51,18 +43,5 @@ class Log
     self.lat = (lat_sum / ss_sum).round(6)
     self.lng = (lng_sum / ss_sum).round(6)
     self.save
-  end
-
-  def create_bs_by_api(bs_info)
-    result = self.class.get("/l.do",
-      {:query => {
-        :c => bs_info["mcc"],
-        :n => bs_info["mnc"],
-        :a => bs_info["lac"],
-        :e => bs_info["cellid"]},
-        :headers => { 'Content-Type' => 'application/json;charset=UTF-8' } })
-    puts result.parsed_response
-    # create a new bs if the bs can be found
-    # return the new bs instance
   end
 end

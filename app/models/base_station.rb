@@ -2,6 +2,10 @@ require 'array'
 require 'math'
 class BaseStation
   include Mongoid::Document
+  include HTTParty
+
+  base_uri 'http://www.minigps.net'
+  format :json
 
   field :uniq_id, :type => Integer
   # mcc, mnc, lac and cellid can identify at most only one BS
@@ -17,8 +21,12 @@ class BaseStation
   field :lng, :type => Float
   field :lat_offset, :type => Float
   field :lng_offset, :type => Float
+  field :lat_api, :type => Float
+  field :lng_api, :type => Float
   field :radius, :type => Integer
   field :description, :type => String
+
+  validates :uniq_id, uniqueness: true
 
   index({ uniq_id: 1 }, { background: true })
   index({ mcc: 1, mnc: 1, lac: 1, cellid: 1 })
@@ -62,5 +70,34 @@ class BaseStation
         bs.save
       end
     end
+  end
+
+  def self.find_bs_by_info(bs_info)
+    result = self.get("/l.do",
+      {:query => {
+        :c => bs_info["mcc"],
+        :n => bs_info["mnc"],
+        :a => bs_info["lac"],
+        :e => bs_info["cellid"],
+        :mt => 0},
+        :headers => { 'Content-Type' => 'application/json;charset=UTF-8' } })
+    puts result.parsed_response
+    result = result.parsed_response
+    return nil if result["cause"] != "OK"
+    bs = BaseStation.where(mcc: bs_info["mcc"], mnc: bs_info["mnc"], lac: bs_info["lac"], cellid: bs_info["cellid"]).first
+    bs = BaseStation.create(mcc: bs_info["mcc"], mnc: bs_info["mnc"], lac: bs_info["lac"], cellid: bs_info["cellid"]) if bs.nil?
+    bs.lat_api = result["lat"].to_f
+    bs.lng_api = result["lng"].to_f
+    bs.lat_offset, bs.lng_offset = *Offset.correct(bs.lat_api, log.lng_api)
+    bs.save
+    return bs
+  end
+
+  def lat_std
+    return self.lat_api || self.lat
+  end
+
+  def lng_std
+    return self.lng_api || self.lng
   end
 end
