@@ -26,7 +26,6 @@ class BaseStation
   field :radius, :type => Integer
   field :description, :type => String
 
-  validates :uniq_id, uniqueness: true
 
   index({ uniq_id: 1 }, { background: true })
   index({ mcc: 1, mnc: 1, lac: 1, cellid: 1 })
@@ -87,10 +86,10 @@ class BaseStation
     return bs if result["cause"] != "OK"
     bs = BaseStation.create(mcc: bs_info["mcc"], mnc: bs_info["mnc"], lac: bs_info["lac"], cellid: bs_info["cellid"]) if bs.nil?
     bs.lat_api = result["lat"].to_f
-    bs.lng_api = result["lng"].to_f
-    [lat_offset, lng_offset] = Offset.correct(bs.lat_api, log.lng_api)
-    bs.lat_offset = lat_offset
-    bs.lng_offset = lng_offset
+    bs.lng_api = result["lon"].to_f
+    offset = Offset.correct(bs.lat_api, bs.lng_api)
+    bs.lat_offset = offset[0]
+    bs.lng_offset = offset[1]
     bs.save
     return bs
   end
