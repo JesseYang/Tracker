@@ -14,10 +14,10 @@
           %th 产生时间
         - @logs.each do |l|
           %tr               
-            %td= l.lng
-            %td= l.lat
-            %td= l.lng_offset
-            %td= l.lat_offset
+            %td= l.lng.try(:round, 4)
+            %td= l.lat.try(:round, 4)
+            %td= l.lng_offset.try(:round, 4)
+            %td= l.lat_offset.try(:round, 4)
             %td= Time.at(l.generated_at).strftime("%Y年%m月%d日%H时%M分%S秒")
 
       = link_to "创建日志", {controller: "logs", action: "new", device_id: @device._id.to_s}, :class => 'btn btn-mini'
