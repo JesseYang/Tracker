@@ -5,7 +5,7 @@ Tracker::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"}
 
   resources :devices do
-    collection do
+    member do
       get :show_map
     end
   end

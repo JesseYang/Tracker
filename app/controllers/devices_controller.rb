@@ -20,6 +20,13 @@ class DevicesController < ApplicationController
       @zoom = @device.log_zoom
     end
     @devices = current_user.devices
+
+    respond_to do |format|
+      format.html # show_map.haml
+      format.json do
+        render json: { logs: @logs }
+      end
+    end
   end
 
   def new
