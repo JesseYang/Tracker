@@ -3,7 +3,7 @@ class LogsController < ApplicationController
 
   def index
     @device = Device.find_by_id(params[:device_id])
-    @logs = @device.logs
+    @logs = auto_paginate @device.logs
   end
 
   def new
@@ -19,6 +19,12 @@ class LogsController < ApplicationController
     log.save
     LogCorrectWorker.perform_async(log.id)
     redirect_to :action => :index, :device_id => params[:log]["device_id"] and return
+  end
+
+  def clear
+    @device = Device.find_by_id(params[:device_id])
+    @device.logs.destroy_all
+    redirect_to :action => :index, :device_id => params[:device_id] and return
   end
 
   def device_create

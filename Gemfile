@@ -15,6 +15,7 @@ gem 'haml', '~> 4.0.0'
 gem 'sidekiq', '~> 2.8.0'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'slim'
+gem 'kaminari', '~> 0.14.1'
 
 # Gems used only for assets and not required
 # in production environments by default.

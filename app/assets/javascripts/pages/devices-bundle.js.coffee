@@ -24,7 +24,8 @@ $ ->
         })
 
         end_marker.setVisible(false) # hide the previous marker
-        end_p = new soso.maps.LatLng(retval.logs[retval.logs.length-1].lat_offset, retval.logs[retval.logs.length-1].lng_offset);
+        end_log = retval.logs[retval.logs.length-1]
+        end_p = new soso.maps.LatLng(end_log.lat_offset, end_log.lng_offset);
         end_marker = new soso.maps.Marker({
           position: end_p,
           map: map

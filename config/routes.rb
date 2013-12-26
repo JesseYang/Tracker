@@ -8,7 +8,13 @@ Tracker::Application.routes.draw do
     member do
       get :show_map
     end
+    resources :logs do
+      collection do
+        delete :clear
+      end
+    end
   end
+
   resources :logs do
     collection do
       post :device_create

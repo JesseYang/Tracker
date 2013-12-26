@@ -1,10 +1,15 @@
 .container
   .span6.offset3
-    - if @logs.blank? 
+    - if @logs["data"].blank? 
       %h4
         没有日志,
         =link_to "创建一条", {controller: "logs", action: "new", device_id: @device._id.to_s}
     - else
+      %div
+        %span
+          = link_to "清除日志", {controller: "logs", action: "clear", device_id: @device._id.to_s}, :method => "delete", :class => 'btn btn-mini'
+        %span.pull-right
+          = paginator_mini @logs
       %table{class: "table"}
         %tr 
           %th 经度
@@ -12,7 +17,7 @@
           %th 火星坐标经度
           %th 火星坐标纬度
           %th 产生时间
-        - @logs.each do |l|
+        - @logs["data"].each do |l|
           %tr               
             %td= l.lng.try(:round, 4)
             %td= l.lat.try(:round, 4)
