@@ -15,6 +15,7 @@ class Log
   # the former four can identify at most one bs
   field :bs_ss, :type => Array
   field :generated_at, :type => Integer
+  field :demo, :type => Boolean, default: false
 
   belongs_to :device
 
@@ -45,5 +46,47 @@ class Log
     self.lat = (lat_sum / ss_sum).round(6)
     self.lng = (lng_sum / ss_sum).round(6)
     self.save
+  end
+
+
+  def self.create_demo_logs
+    Log.where(demo: true).destroy_all
+    lat_lng_array = [
+      [40.016802,116.368924],
+      [40.017648,116.368892],
+      [40.017689,116.370308],
+      [40.017681,116.371413],
+      [40.017714,116.372872],
+      [40.017673,116.374492],
+      [40.016703,116.374578],
+      [40.016038,116.374642]
+    ]
+    time = Time.now.to_i
+    lat_lng_array.each do |lat_lng|
+      Log.create(lat: lat_lng[0],
+        lng: lat_lng[1],
+        lat_offset: lat_lng[0],
+        lng_offset: lat_lng[1],
+        demo: true,
+        generated_at: time)
+      time += 1
+    end
+  end
+
+  def self.demo_log_center(logs)
+    latitude_ary = logs.map { |e| e.lat_offset }
+    longitude_ary = logs.map { |e| e.lng_offset }
+    return [latitude_ary.mean, longitude_ary.mean]
+  end
+
+  def self.demo_log_zoom(logs)
+    latitude_ary = logs.map { |e| e.lat_offset }
+    longitude_ary = logs.map { |e| e.lng_offset }
+    latitude_diff = latitude_ary.max - latitude_ary.min
+    longitude_diff = longitude_ary.max - longitude_ary.min
+    zoom = []
+    zoom << (longitude_diff == 0 ? 18 : (18 - Math.my_log(2, longitude_diff / Device::LONGITUDE_BASE)).floor)
+    zoom << (latitude_diff == 0 ? 18 : (18 - Math.my_log(2, latitude_diff / Device::LATITUDE_BASE)).floor)
+    @zoom = zoom.min
   end
 end

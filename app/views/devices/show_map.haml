@@ -9,6 +9,7 @@
     window.zoom = '#{@zoom}'
     window.logs = '#{(@logs.map { |l| l.lat_offset.to_s + ',' + l.lng_offset.to_s }).join('-')}'
     window.device_id = '#{@device.id.to_s}'
+    window.demo = '#{@demo}'
 
 #container
 .input_area

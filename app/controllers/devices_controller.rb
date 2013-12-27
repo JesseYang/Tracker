@@ -7,17 +7,27 @@ class DevicesController < ApplicationController
   end
 
   def show_map
+    @demo = params[:demo].to_s == "true"
     @device = Device.find_by_id(params[:id])
-    @logs = @device.eff_logs.asc(:created_at)
-    @logs = @logs.select { |e| e.lat_offset.present? && e.lng_offset.present? }
+    if @demo
+      demo_logs = Log.where(demo: true).asc(:generated_at)
+      if params[:log_index].nil?
+        @logs = demo_logs.limit(1)
+      else
+        @logs = demo_logs.length > params[:log_index].to_i ? demo_logs.limit(params[:log_index].to_i) : demo_logs
+      end
+    else
+      @logs = @device.eff_logs.asc(:created_at)
+      @logs = @logs.select { |e| e.lat_offset.present? && e.lng_offset.present? }
+    end
     if @logs.blank?
       @center = [39.916527,116.397128]
       @zoom = 8
     else
-      @center = @device.log_center
       @start = [@logs[0].lat_offset, @logs[0].lng_offset]
       @end = [@logs[-1].lat_offset, @logs[-1].lng_offset]
-      @zoom = @device.log_zoom
+      @center = @demo ? Log.demo_log_center(@logs) : @device.log_center
+      @zoom = @demo ? Log.demo_log_zoom(@logs) : @device.log_zoom
     end
     @devices = current_user.devices
 

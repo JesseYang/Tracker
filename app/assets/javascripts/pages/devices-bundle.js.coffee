@@ -3,40 +3,48 @@ $ ->
   map = null
   size = new soso.maps.Size(42, 68)
   origin = new soso.maps.Point(0, 0)
-  anchor = new soso.maps.Point(0, 39)
+  # anchor = new soso.maps.Point(0, 39)
+  anchor = new soso.maps.Point(10, 30)
   end_marker = null
+  start_marker = null
   interval = 1000
+  demo_log_index = 2
+  log_length = 0
   updateLog = -> 
     # use ajax to get the logs and refresh the map
     $.getJSON(
       '/devices/' + window.device_id + '/show_map.json',
-      { },
+      { demo: window.demo, log_index: demo_log_index },
       (retval) ->
+        if window.demo == "true"
+          demo_log_index += 1
         path = []
         for log in retval.logs
           path.push(new soso.maps.LatLng(log.lat_offset, log.lng_offset))
-        polyline = new soso.maps.Polyline({
-          path: path,
-          strokeColor: '#000000',
-          strokeWeight: 5,
-          editable:false,
-          map: map
-        })
+        if log_length != retval.logs.length
+          polyline = new soso.maps.Polyline({
+            path: path,
+            strokeColor: '#000000',
+            strokeWeight: 5,
+            editable:false,
+            map: map
+          })
 
-        end_marker.setVisible(false) # hide the previous marker
-        end_log = retval.logs[retval.logs.length-1]
-        end_p = new soso.maps.LatLng(end_log.lat_offset, end_log.lng_offset);
-        end_marker = new soso.maps.Marker({
-          position: end_p,
-          map: map
-        });
-        end_icon =  new soso.maps.MarkerImage(
-          "/assets/end.png", 
-          size,
-          origin,
-          anchor
-        );
-        end_marker.setIcon(end_icon);
+          end_marker.setVisible(false) # hide the previous marker
+          end_log = retval.logs[retval.logs.length-1]
+          end_p = new soso.maps.LatLng(end_log.lat_offset, end_log.lng_offset);
+          end_marker = new soso.maps.Marker({
+            position: end_p,
+            map: map
+          });
+          end_icon =  new soso.maps.MarkerImage(
+            "/assets/end.png", 
+            size,
+            origin,
+            anchor
+          );
+          end_marker.setIcon(end_icon);
+        log_length = retval.logs.length
     ) 
     setTimeout(updateLog, interval)
 
