@@ -38,6 +38,7 @@ class Device
     zoom = []
     zoom << (longitude_diff == 0 ? 18 : (18 - Math.my_log(2, longitude_diff / LONGITUDE_BASE)).floor)
     zoom << (latitude_diff == 0 ? 18 : (18 - Math.my_log(2, latitude_diff / LATITUDE_BASE)).floor)
+    zoom << 18
     @zoom = zoom.min
   end
 end
