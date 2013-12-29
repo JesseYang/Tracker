@@ -19,3 +19,8 @@
       .controls
         = select_tag :id, options_from_collection_for_select(@devices, "id", "name", @device.id)
       = submit_tag "确定"
+  = link_to "查看日志列表", { controller: "logs", action: "index", device_id: @device._id.to_s }, :class => 'btn btn-mini'
+  - if @demo
+    = link_to "返回", { controller: "devices", action: "show_map", id: @device._id.to_s, demo: false }, :class => 'btn btn-mini'
+  - else
+    = link_to "动态加载演示", { controller: "devices", action: "show_map", id: @device._id.to_s, demo: true }, :class => 'btn btn-mini'

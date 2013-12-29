@@ -8,6 +8,8 @@
       %div
         %span
           = link_to "清除日志", {controller: "logs", action: "clear", device_id: @device._id.to_s}, :method => "delete", :class => 'btn btn-mini'
+        %span
+          = link_to "地图显示日志", {controller: "devices", action: "show_map", id: @device._id.to_s}, :class => 'btn btn-mini'
         %span.pull-right
           = paginator_mini @logs
       %table{class: "table"}
