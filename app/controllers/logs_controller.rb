@@ -1,9 +1,21 @@
+# encoding: utf-8
 require 'string'
 class LogsController < ApplicationController
 
   def index
     @device = Device.find_by_id(params[:device_id])
-    @logs = auto_paginate @device.logs.desc(:created_at)
+    @logs = @device.logs.desc(:generated_at)
+    if params[:start_time].present?
+      start_time = Time.mktime(*params[:start_time].scan(/(.*)\/(.*)\/(.*)\s*-\s*(.*):(.*)/)[0]).to_i
+      @logs = @logs.where(:generated_at.gt => start_time)
+    end
+    if params[:end_time].present?
+      end_time = Time.mktime(*params[:end_time].scan(/(.*)\/(.*)\/(.*)\s*-\s*(.*):(.*)/)[0]).to_i
+      @logs = @logs.where(:generated_at.lt => end_time)
+    end
+    @logs = auto_paginate @logs
+    @start_str = params[:start_time]
+    @end_str = params[:end_time]
   end
 
   def new
