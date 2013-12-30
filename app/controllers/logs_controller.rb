@@ -3,7 +3,7 @@ class LogsController < ApplicationController
 
   def index
     @device = Device.find_by_id(params[:device_id])
-    @logs = auto_paginate @device.logs
+    @logs = auto_paginate @device.logs.desc(:created_at)
   end
 
   def new
