@@ -1,6 +1,5 @@
 - content_for :app_head do
   = javascript_include_tag "pages/logs-bundle"
-  = stylesheet_link_tag "bootstrap-datetimepicker", :media => "all"
   :javascript
     window.start_str = '#{@start_str}'
     window.end_str = '#{@end_str}'
