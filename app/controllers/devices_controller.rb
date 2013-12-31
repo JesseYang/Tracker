@@ -18,6 +18,14 @@ class DevicesController < ApplicationController
       end
     else
       @logs = @device.eff_logs.asc(:created_at)
+      if params[:start_time].present?
+        start_time = Time.mktime(*params[:start_time].scan(/(.*)\/(.*)\/(.*)\s*-\s*(.*):(.*)/)[0]).to_i
+        @logs = @logs.where(:generated_at.gt => start_time)
+      end
+      if params[:end_time].present?
+        end_time = Time.mktime(*params[:end_time].scan(/(.*)\/(.*)\/(.*)\s*-\s*(.*):(.*)/)[0]).to_i
+        @logs = @logs.where(:generated_at.lt => end_time)
+      end
       @logs = @logs.select { |e| e.lat_offset.present? && e.lng_offset.present? }
     end
     if @logs.blank?
@@ -30,6 +38,8 @@ class DevicesController < ApplicationController
       @zoom = @demo ? Log.demo_log_zoom(@logs) : @device.log_zoom
     end
     @devices = current_user.devices
+    @start_str = params[:start_time]
+    @end_str = params[:end_time]
 
     respond_to do |format|
       format.html # show_map.haml

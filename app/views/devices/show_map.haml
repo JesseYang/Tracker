@@ -1,7 +1,9 @@
 - content_for :app_head do
   = javascript_include_tag "http://map.soso.com/api/v2/main.js"
   = javascript_include_tag "pages/devices-bundle"
+  = javascript_include_tag "pages/logs-bundle"
   = stylesheet_link_tag "pages/devices-bundle", :media => "all"
+  = stylesheet_link_tag "bootstrap-datetimepicker", :media => "all"
   :javascript
     window.center = ['#{@center[0]}', '#{@center[1]}']
     window.start = '#{@start.to_a.join(',')}'
@@ -10,15 +12,31 @@
     window.logs = '#{(@logs.map { |l| l.lat_offset.to_s + ',' + l.lng_offset.to_s }).join('-')}'
     window.device_id = '#{@device.id.to_s}'
     window.demo = '#{@demo}'
+    window.start_str = '#{@start_str}'
+    window.end_str = '#{@end_str}'
 
 #container
 .input_area
   = form_tag({controller: "devices", action: "show_map"}, method: "get") do
     .control-group
+      = label_tag :name, "起始时间"
+      .controls.input-append.date.form_datetime{"data-date" => "", "data-date-format" => "yyyy/mm/dd - HH:ii p", "data-link-field" => "dtp_input1"}
+        %input{id: "start_input", readonly: "readonly", name: "start_time", size: "12", type: "text", value: ""}/
+        %span.add-on
+          %i.icon-remove
+        %span.add-on
+          %i.icon-th
+      = label_tag :name, "终止时间"
+      .controls.input-append.date.form_datetime{"data-date" => "", "data-date-format" => "yyyy/mm/dd - HH:ii p", "data-link-field" => "dtp_input2"}
+        %input{id: "end_input", readonly: "readonly", name: "end_time", size: "12", type: "text", value: ""}/
+        %span.add-on
+          %i.icon-remove
+        %span.add-on
+          %i.icon-th
       = label_tag :name, "选择设备"
       .controls
         = select_tag :id, options_from_collection_for_select(@devices, "id", "name", @device.id)
-      = submit_tag "确定"
+      = submit_tag "确定", :class => 'btn-primary btn'
   = link_to "查看日志列表", { controller: "logs", action: "index", device_id: @device._id.to_s }, :class => 'btn btn-mini'
   - if @demo
     = link_to "返回", { controller: "devices", action: "show_map", id: @device._id.to_s, demo: false }, :class => 'btn btn-mini'

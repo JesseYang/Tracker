@@ -14,7 +14,10 @@ $ ->
     # use ajax to get the logs and refresh the map
     $.getJSON(
       '/devices/' + window.device_id + '/show_map.json',
-      { demo: window.demo, log_index: demo_log_index },
+      { demo: window.demo,
+      log_index: demo_log_index,
+      start_time: $("#start_input").val(),
+      end_time: $("#end_input").val() },
       (retval) ->
         if window.demo == "true"
           demo_log_index += 1

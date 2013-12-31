@@ -11,10 +11,9 @@ $white: #ffffff;
 }
 .input_area {
   position: absolute;
-  float: right;
   z-index: 2;
-  right: 20px;
-  top: 100px;
+  left: 20px;
+  bottom: 50px;
   background-color: $black;
   opacity: 0.7;
   padding: 10px;
