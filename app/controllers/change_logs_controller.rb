@@ -2,7 +2,7 @@
 class ChangeLogsController < ApplicationController
 
   def index
-    @change_logs = ChangeLog.all.desc(:created_at)
+    @change_logs = ChangeLog.all.desc(:generated_at)
   end
 
   def create

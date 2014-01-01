@@ -7,7 +7,7 @@
         %th 操作
       - @change_logs.each do |cl|
         %tr
-          %td= cl.created_at
+          %td= Time.at(cl.generated_at).strftime('%Y-%m-%d %H:%M:%S')
           %td= cl.title
           %td
             = link_to "查看详细", { controller: "change_logs", action: "show", id: cl._id.to_s }, :method => "get", :class => 'btn btn-mini' 
