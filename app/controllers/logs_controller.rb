@@ -27,7 +27,7 @@ class LogsController < ApplicationController
     log = Log.create(params[:log])
     log.lat_offset = log.lat
     log.lng_offset = log.lng
-    log.generated_at = Time.now.to_i
+    log.generated_at = params[:generated_at].present? ? params[:generated_at].to_i : Time.now.to_i
     log.save
     LogCorrectWorker.perform_async(log.id)
     redirect_to :action => :index, :device_id => params[:log]["device_id"] and return
@@ -50,7 +50,7 @@ class LogsController < ApplicationController
       lng: params[:lng].to_f,
       lat_offset: params[:lat].to_f,
       lng_offset: params[:lng].to_f,
-      generated_at: Time.now.to_i)
+      generated_at: params[:generated_at].present? ? params[:generated_at].to_i : Time.now.to_i)
     device.logs << log
     LogCorrectWorker.perform_async(log.id)
     render :json => {
@@ -73,7 +73,7 @@ class LogsController < ApplicationController
       bs_ss << {mcc: temp[0].to_i, mnc: temp[1].to_i, lac: temp[2].hex2int, cellid: temp[3].hex2int, ss: temp[4].to_f}
     end
     log = Log.create(bs_ss: bs_ss,
-      generated_at: Time.now.to_i)
+      generated_at: params[:generated_at].present? ? params[:generated_at].to_i : Time.now.to_i)
     LogBsWorker.perform_async(log.id)
     device.logs << log
     render :json => {
