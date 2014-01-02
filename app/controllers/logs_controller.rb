@@ -81,4 +81,9 @@ class LogsController < ApplicationController
       :value => ""
     } and return
   end
+
+  def bs_detail
+    log = Log.find(params[:id])
+    render :partial => 'logs/bs_detail', :locals => { bs_ss: log.bs_ss } and return
+  end
 end

@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Log
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -88,5 +89,27 @@ class Log
     zoom << (longitude_diff == 0 ? 18 : (18 - Math.my_log(2, longitude_diff / Device::LONGITUDE_BASE)).floor)
     zoom << (latitude_diff == 0 ? 18 : (18 - Math.my_log(2, latitude_diff / Device::LATITUDE_BASE)).floor)
     @zoom = zoom.min
+  end
+
+  def bs_info
+    return "无" if self.bs_ss.blank?
+    return "非境内基站" if bs_ss[0]["mcc"].to_i != 460
+    bs_info = "中国"
+    case bs_ss[0]["mnc"].to_i
+    when 0, 2
+      bs_info += "移动"
+    when 1
+      bs_info += "联通"
+    when 3
+      bs_info += "电信"
+    end
+    bs_info += "; 大区号: #{bs_ss[0]["lac"]}"
+    # bs_info += "; 小区id: #{bs_ss[0]["cellid"]}"
+    bs_info += "..."
+    return bs_info
+  end
+
+  def has_bs_info?
+    self.bs_ss.present? && self.bs_ss[0]["mcc"].to_i == 460
   end
 end

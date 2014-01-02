@@ -1,5 +1,6 @@
 - content_for :app_head do
   = javascript_include_tag "pages/logs-bundle"
+  = stylesheet_link_tag "pages/logs-bundle", :media => "all"
   :javascript
     window.start_str = '#{@start_str}'
     window.end_str = '#{@end_str}'
@@ -46,6 +47,7 @@
           %th 火星坐标经度
           %th 火星坐标纬度
           %th 产生时间
+          %th 基站信息(点击查看详细)
         - @logs["data"].each do |l|
           %tr               
             %td= l.lng.try(:round, 4)
@@ -53,6 +55,15 @@
             %td= l.lng_offset.try(:round, 4)
             %td= l.lat_offset.try(:round, 4)
             %td= Time.at(l.generated_at).strftime("%Y年%m月%d日%H时%M分%S秒")
+            %td.bs_detail_td
+              - if l.has_bs_info?
+                %a{href: "#bs_detail", "data-toggle" => "modal", "data-log-id" => l.id.to_s}= l.bs_info
+              - else
+                %span= l.bs_info
 
       = link_to "创建日志", {controller: "logs", action: "new", device_id: @device._id.to_s}, :class => 'btn btn-mini'
     = link_to "返回设备列表", {controller: "devices", action: "index"}, :class => 'btn btn-mini'
+
+
+#bs_detail.modal.hide.fade
+

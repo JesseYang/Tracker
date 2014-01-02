@@ -1,0 +1,12 @@
+%table{class: "table"}
+  %tr 
+    %th 运营商
+    %th 大区号
+    %th 小区id
+    %th 信号强度
+  - bs_ss.each do |e|
+    %tr
+      %td= operator e["mnc"]
+      %td= e["lac"]
+      %td= e["cellid"]
+      %td= e["ss"]

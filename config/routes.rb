@@ -20,6 +20,9 @@ Tracker::Application.routes.draw do
       post :device_create
       post :device_create_bs
     end
+    member do
+      get :bs_detail
+    end
   end
 
   resources :change_logs

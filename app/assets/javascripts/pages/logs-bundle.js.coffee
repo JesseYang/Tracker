@@ -1,5 +1,6 @@
 #= require bootstrap-datetimepicker.js
 #= require bootstrap-datetimepicker.zh-CN.js
+
 $ ->
   $(".form_datetime").datetimepicker
     language:  'zh-CN',
@@ -12,3 +13,15 @@ $ ->
     showMeridian: 1
   $("#start_input").val(window.start_str)
   $("#end_input").val(window.end_str)
+
+  $(document).on(
+    "click"
+    ".bs_detail_td a"
+    ->
+      $.get(
+        '/logs/' + $(this).data("log-id") + '/bs_detail',
+        {},
+        (retval) ->
+          $("#bs_detail").html(retval)
+      )
+  )
