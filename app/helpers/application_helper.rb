@@ -8,11 +8,11 @@ module ApplicationHelper
 
   def operator(mnc)
     case mnc.to_i
-    when 0, 2
+    when 0, 2, 7
       "中国移动"
-    when 1
+    when 1, 6
       "中国联通"
-    when 3
+    when 3, 5
       "中国电信"
     end
   end

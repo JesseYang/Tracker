@@ -96,11 +96,11 @@ class Log
     return "非境内基站" if bs_ss[0]["mcc"].to_i != 460
     bs_info = "中国"
     case bs_ss[0]["mnc"].to_i
-    when 0, 2
+    when 0, 2, 7
       bs_info += "移动"
-    when 1
+    when 1, 6
       bs_info += "联通"
-    when 3
+    when 3, 5
       bs_info += "电信"
     end
     bs_info += "; 大区号: #{bs_ss[0]["lac"]}"
