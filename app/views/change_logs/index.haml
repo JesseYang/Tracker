@@ -1,3 +1,5 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/change_logs-bundle"
 .container
   .span6.offset3
     %table{class: "table"}
@@ -23,6 +25,14 @@
       %button{type: "button", class: "close", "data-dismiss" => "modal", "aria-hidden" => "true"} &times;
       %h3 创建更新日志
     .modal-body
+      .control-group
+        = label_tag :name, "时间", :class => 'control-label'
+        .controls.input-append.date.form_datetime{"data-date" => "", "data-date-format" => "yyyy/mm/dd - HH:ii p", "data-link-field" => "dtp_input1"}
+          %input{id: "start_input", readonly: "readonly", name: "generated_at", size: "12", type: "text", value: ""}/
+          %span.add-on
+            %i.icon-remove
+          %span.add-on
+            %i.icon-th
       .control-group
         = label_tag :name, "标题", :class => 'control-label'
         .controls

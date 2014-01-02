@@ -4,3 +4,5 @@
     - @change_log.content.split("\r\n").each do |p|
       %span= p
       %br
+    %br
+    = link_to "返回列表", { controller: "change_logs", action: "index" }, :method => "get", :class => 'btn btn-mini' 
