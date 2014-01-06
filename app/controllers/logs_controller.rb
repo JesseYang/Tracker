@@ -65,13 +65,7 @@ class LogsController < ApplicationController
       :success => false,
       :value => "Device Not Found"
     } and return if device.nil?
-    bs_ary = params[:bs_ss].split('&')
-    bs_ss = []
-    bs_ary.each do |bs|
-      temp = bs.split(',')
-      next if temp[4] == 0
-      bs_ss << {mcc: temp[0].to_i, mnc: temp[1].to_i, lac: temp[2].hex2int, cellid: temp[3].hex2int, ss: temp[4].to_f}
-    end
+    bs_ss = BaseStation.parse_bs_data(params[:data], params[:type])
     log = Log.create(bs_ss: bs_ss,
       generated_at: params[:generated_at].present? ? params[:generated_at].to_i : Time.now.to_i)
     LogBsWorker.perform_async(log.id)
@@ -82,6 +76,7 @@ class LogsController < ApplicationController
     } and return
   end
 
+  # render partial for a json request
   def bs_detail
     log = Log.find(params[:id])
     render :partial => 'logs/bs_detail', :locals => { bs_ss: log.bs_ss } and return

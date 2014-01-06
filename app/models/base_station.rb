@@ -101,4 +101,39 @@ class BaseStation
   def lng_std
     return self.lng_api || self.lng
   end
+
+  def self.parse_bs_data(data, type)
+    bs_ss = []
+    case type.to_i
+    when 0
+      data.scan(/"(.+)"/).each_with_index do |e, index|
+        bs_data = e[0].split(',')
+        next if bs_data[3].to_i(16) + bs_data[4].to_i == 0
+        if index == 0
+          bs_ss << {mcc: bs_data[3].to_i,
+            mnc: bs_data[4].to_i,
+            lac: bs_data[9].to_i(16),
+            cellid: bs_data[6].to_i(16),
+            ss: bs_data[1].to_f}
+        else
+          bs_ss << {mcc: bs_data[4].to_i,
+            mnc: bs_data[5].to_i,
+            lac: bs_data[6].to_i(16),
+            cellid: bs_data[3].to_i(16),
+            ss: bs_data[1].to_f}
+        end
+      end
+    when 1
+      data.scan(/: (.+)/).each do |e|
+        bs_data = e[0].split(',')
+        next if bs_data[0].blank? || bs_data[0].to_i == 0
+        bs_ss << {mcc: bs_data[0].to_i,
+          mnc: bs_data[1].to_i,
+          lac: bs_data[2].to_i(16),
+          cellid: bs_data[3].to_i(16),
+          ss: bs_data[-1].to_f}
+      end
+    end
+    bs_ss
+  end
 end
