@@ -124,7 +124,7 @@ class BaseStation
         end
       end
     when 1
-      data.scan(/: (.+)/).each do |e|
+      data.scan(/R:(.*?)(E|\z)/).each do |e|
         bs_data = e[0].split(',')
         next if bs_data[0].blank? || bs_data[0].to_i == 0
         bs_ss << {mcc: bs_data[0].to_i,
