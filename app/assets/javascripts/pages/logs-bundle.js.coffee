@@ -11,8 +11,8 @@ $ ->
     startView: 2
     forceParse: 0
     showMeridian: 1
-  $("#start_input").val(window.start_str)
-  $("#end_input").val(window.end_str)
+  $("#start_input_shown").val(window.start_str)
+  $("#end_input_shown").val(window.end_str)
 
   $(document).on(
     "click"
@@ -22,6 +22,6 @@ $ ->
         '/logs/' + $(this).data("log-id") + '/bs_detail',
         {},
         (retval) ->
-          $("#bs_detail").html(retval)
+          $("#bs_detail .modal-content").html(retval)
       )
   )

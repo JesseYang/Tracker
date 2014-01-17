@@ -8,10 +8,16 @@
     = csrf_meta_tags
   %body
     #wrap
-      .navbar
-        .navbar-inner
-          %a.brand{href: "/devices"} Tracker
-          %ul.nav
+      .navbar.navbar-default{role: "navigation"}
+        .navbar-header
+          %button.navbar-toggle.collapsed{ type: "button", data: {toggle: "collapse", target: "#navbar-collapse"}}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{href: "/devices"} Tracker
+        .collapse.navbar-collapse#navbar-collapse
+          %ul.nav.navbar-nav
             - if user_signed_in?
               %li.divider-vertical
               %li.active
@@ -22,19 +28,17 @@
             %li.divider-vertical
             %li
               %a{href: "#"} 联系我们
-          - if user_signed_in?
-            %ul.nav.pull-right
-              %li.dropdown
-                %a.dropdown-toggle{href: "#", "data-toggle" => "dropdown"}
+          %ul.nav.navbar-nav.navbar-right
+            %li.dropdown
+              - if user_signed_in?
+                %a.dropdown-toggle{href: "#", data: {toggle: "dropdown"}}
                   = current_user.email
                   %b.caret
                 %ul.dropdown-menu
                   %li
-                    %a{href: "/users/sign_out", "data-method" => "delete", rel: "nofollow"} 退出
-          - else
-            %ul.nav.pull-right
-              %li.dropdown
-                %a.dropdown-toggle{href: "#{}", "data-toggle" => "dropdown"}
+                    %a{href: "/users/sign_out", data: {method: "delete"}, rel: "nofollow"} 退出
+              - else
+                %a.dropdown-toggle{href: "#", data: {toggle: "dropdown"}}
                   Account
                   %b.caret
                 %ul.dropdown-menu
@@ -44,8 +48,8 @@
                     %a{href: "/users/sign_up"} 注册
       .container
         - flash.each do |name, msg|
-          %div{:class => "alert alert-#{ name == :notice ? "success" : "error" }"}
-            %button{type: "button", class: "close", "data-dismiss" => "alert"} &times;
+          %div{:class => "alert alert-#{ name == :notice ? "success" : "danger" }"}
+            %button{type: "button", class: "close", "aria-hidden" => "true", data: {dismiss: "alert"}} &times;
             = msg
       = yield
       #push
