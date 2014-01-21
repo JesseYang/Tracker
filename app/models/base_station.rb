@@ -84,6 +84,7 @@ class BaseStation
       Rails.logger.info "AAAAAAAAAAAAAA"
       Rails.logger.info result.code
       Rails.logger.info "AAAAAAAAAAAAAA"
+    end
     puts result.parsed_response
     result = result.parsed_response
     bs = BaseStation.where(mcc: bs_info["mcc"], mnc: bs_info["mnc"], lac: bs_info["lac"], cellid: bs_info["cellid"]).first

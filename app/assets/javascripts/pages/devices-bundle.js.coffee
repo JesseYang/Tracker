@@ -3,7 +3,6 @@ $ ->
   map = null
   size = new soso.maps.Size(42, 68)
   origin = new soso.maps.Point(0, 0)
-  # anchor = new soso.maps.Point(0, 39)
   anchor = new soso.maps.Point(10, 30)
   end_marker = null
   start_marker = null
@@ -16,8 +15,8 @@ $ ->
       '/devices/' + window.device_id + '/show_map.json',
       { demo: window.demo,
       log_index: demo_log_index,
-      start_time: $("#start_input").val(),
-      end_time: $("#end_input").val() },
+      start_time: $("#start_input_shown").val(),
+      end_time: $("#end_input_shown").val() },
       (retval) ->
         if window.demo == "true"
           demo_log_index += 1
