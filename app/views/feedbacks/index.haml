@@ -4,17 +4,18 @@
 
 .container
   .col-sm-6.col-sm-offset-3
-    %table.table.table-striped
-      %tr
-        %th 创建日期
-        %th 标题
-        %th 邮箱
-      - @feedbacks.each do |f|
+    .table-responsive
+      %table.table.table-striped
         %tr
-          %td= f.created_at
-          %td
-            %a.openFeedback{href: "javascript:void();", data: {toggle: "modal", target: "#feedbackDetail", title: "#{f.title}", content: "#{f.content}", email: "#{f.email}"}}= f.title
-          %td= f.email
+          %th 创建日期
+          %th 标题
+          %th 邮箱
+        - @feedbacks.each do |f|
+          %tr
+            %td= f.created_at
+            %td
+              %a.openFeedback{href: "javascript:void();", data: {toggle: "modal", target: "#feedbackDetail", title: "#{f.title}", content: "#{f.content}", email: "#{f.email}"}}= f.title
+            %td= f.email
 
 #feedbackDetail.modal.fade
   .modal-dialog
