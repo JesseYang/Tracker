@@ -1,8 +1,8 @@
 - content_for :app_head do
   = javascript_include_tag "pages/change_logs-bundle"
 .container
-  .span6.offset3
-    %table{class: "table"}
+  .col-sm-6.col-sm-offset-3
+    %table.table.table-striped
       %tr
         %th 创建日期
         %th 标题
@@ -12,35 +12,37 @@
           %td= Time.at(cl.generated_at).strftime('%Y-%m-%d %H:%M:%S')
           %td= cl.title
           %td
-            = link_to "查看详细", { controller: "change_logs", action: "show", id: cl._id.to_s }, :method => "get", :class => 'btn btn-mini' 
+            = link_to "查看详细", { controller: "change_logs", action: "show", id: cl._id.to_s }, :method => "get", :class => 'btn btn-default btn-xs' 
             - if current_user.try(:admin)
-              = link_to "删除", { controller: "change_logs", action: "destroy", id: cl._id.to_s }, :method => "delete", :class => 'btn btn-mini btn-danger' 
+              = link_to "删除", { controller: "change_logs", action: "destroy", id: cl._id.to_s }, :method => "delete", :class => 'btn btn-xs btn-danger' 
             / = link_to "编辑", { controller: "change_logs", action: "edit", id: cl._id.to_s }, :class => 'btn btn-mini'
     - if current_user.try(:admin)
-      %a{href: "#newChangeLog", role: "button", class: "btn", "data-toggle" => "modal"} 创建日志
+      %a.btn.btn-primary{role: "button", data: {toggle: "modal", target: "#newChangeLog"} } 创建日志
 
-#newChangeLog.modal.hide.fade
-  = form_tag('/change_logs', method: "post", class: "form-horizontal") do
-    .modal-header
-      %button{type: "button", class: "close", "data-dismiss" => "modal", "aria-hidden" => "true"} &times;
-      %h3 创建更新日志
-    .modal-body
-      .control-group
-        = label_tag :name, "时间", :class => 'control-label'
-        .controls.input-append.date.form_datetime{"data-date" => "", "data-date-format" => "yyyy/mm/dd - HH:ii p", "data-link-field" => "dtp_input1"}
-          %input{id: "start_input", readonly: "readonly", name: "generated_at", size: "12", type: "text", value: ""}/
-          %span.add-on
-            %i.icon-remove
-          %span.add-on
-            %i.icon-th
-      .control-group
-        = label_tag :name, "标题", :class => 'control-label'
-        .controls
-          = text_field_tag "change_log[title]", "", :autofocus => true
-      .control-group
-        = label_tag :imei, "内容", :class => 'control-label'
-        .controls
-          = text_area_tag "change_log[content]", ""
-    .modal-footer
-      %a{href: "#", class: "btn", "data-dismiss" => "modal", "aria-hidden" => "true"} 取消
-      = submit_tag "创建", :class => 'btn-primary btn'
+- if current_user.try(:admin)
+  #newChangeLog.modal.fade
+    .modal-dialog
+      .modal-content
+        = form_tag('/change_logs', method: "post") do
+          .modal-header
+            %button.close{type: "button", data: {dismiss: "modal"}, "aria-hidden" => "true"} &times;
+            %h3 创建更新日志
+          .modal-body
+            .form-group
+              = label_tag :dtp_input, "时间", :class => 'control-label'
+              #dtp_input_div.input-group.date.form_datetime.col-md-6{data: {date: "", "date-format" => "yyyy/mm/dd - HH:ii p", "link-field" => "dtp_input"} }
+                %input#dtp_input_shown.form-control{readonly: "readonly", name: "generated_at", size: "12", type: "text", value: ""}/
+                %span.input-group-addon
+                  %span.glyphicon.glyphicon-remove
+                %span.input-group-addon
+                  %span.glyphicon.glyphicon-th
+              %input#dtp_input{type: "hidden", value: ""}/
+            .form-group
+              = label_tag :name, "标题", :class => 'control-label'
+              = text_field_tag "change_log[title]", "", :autofocus => true, class: "form-control"
+            .form-group
+              = label_tag :imei, "内容", :class => 'control-label'
+              = text_area_tag "change_log[content]", "", class: "form-control"
+        .modal-footer
+          %a.btn.btn-default{href: "#", data: {dismiss: "modal"}, "aria-hidden" => "true"} 取消
+          = submit_tag "创建", :class => 'btn-primary btn'

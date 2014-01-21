@@ -3,19 +3,16 @@
   = stylesheet_link_tag "pages/feedbacks-bundle", :media => "all"
 
 .container
-  .span6.offset3
+  .col-sm-6.col-sm-offset-3
     = form_for(@feedback, url: {action: 'create'}) do |f|
-      .control-group
+      .form-group
         = f.label :title, "标题"
-        .controls
-          = f.text_field :title
-      .control-group
+        = f.text_field :title, class: "form-control"
+      .form-group
         = f.label :content, "内容"
-        .controls
-          = f.text_area :content
-      .control-group
+        = f.text_area :content, class: "form-control"
+      .form-group
         = f.label :email, "邮箱"
-        .controls
-          = f.text_field :email
-      .control-group
-        = f.submit "创建"
+        = f.text_field :email, class: "form-control"
+      .form-group
+        = f.submit "创建", :class => 'btn-primary btn'

@@ -3,8 +3,8 @@
   = stylesheet_link_tag "pages/feedbacks-bundle", :media => "all"
 
 .container
-  .span6.offset3
-    %table{class: "table"}
+  .col-sm-6.col-sm-offset-3
+    %table.table.table-striped
       %tr
         %th 创建日期
         %th 标题
@@ -13,19 +13,21 @@
         %tr
           %td= f.created_at
           %td
-            %a{class: "openFeedback", href: "#feedbackDetail", "data-toggle" => "modal", "data-title" => "#{f.title}", "data-content" => "#{f.content}", "data-email" => "#{f.email}"}= f.title
+            %a.openFeedback{href: "javascript:void();", data: {toggle: "modal", target: "#feedbackDetail", title: "#{f.title}", content: "#{f.content}", email: "#{f.email}"}}= f.title
           %td= f.email
 
-#feedbackDetail.modal.hide.fade
-  .modal-header
-    %button{type: "button", class: "close", "data-dismiss" => "modal", "aria-hidden" => "true"} &times;
-    %h3
-  .modal-body
-    .control-group
-      .controls
-        %text_area_tag.content
-    .control-group
-      .controls
-        %text_area_tag.email
-  .modal-footer
+#feedbackDetail.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{type: "button", class: "close", "data-dismiss" => "modal", "aria-hidden" => "true"} &times;
+        %h3
+      .modal-body
+        .control-group
+          .controls
+            %text_area_tag.content
+        .control-group
+          .controls
+            %text_area_tag.email
+      .modal-footer
 

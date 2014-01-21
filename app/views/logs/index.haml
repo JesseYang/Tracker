@@ -9,8 +9,7 @@
   .col-sm-8.col-sm-offset-2
     - if @logs["data"].blank? 
       %h4
-        没有日志,
-        =link_to "创建一条", {controller: "logs", action: "new", device_id: @device._id.to_s}
+        没有符合条件的日志,
     - else
       %div
         %span
@@ -39,7 +38,7 @@
               %span.glyphicon.glyphicon-th
           %input#end_input{type: "hidden", value: ""}/
           = submit_tag "搜索", :class => 'btn-primary btn'
-      %table{class: "table table-striped"}
+      %table.table.table-striped
         %tr 
           %th 经度
           %th 纬度
@@ -60,8 +59,7 @@
               - else
                 %span= l.bs_info
 
-      = link_to "创建日志", {controller: "logs", action: "new", device_id: @device._id.to_s}, :class => 'btn btn-mini'
-    = link_to "返回设备列表", {controller: "devices", action: "index"}, :class => 'btn btn-mini'
+    = link_to "返回设备列表", {controller: "devices", action: "index"}, :class => 'btn btn-default btn-xs'
 
 
 #bs_detail.modal.fade
