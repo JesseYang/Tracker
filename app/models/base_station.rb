@@ -80,6 +80,10 @@ class BaseStation
         :e => bs_info["cellid"],
         :mt => 0},
         :headers => { 'Content-Type' => 'application/json;charset=UTF-8' } })
+    if result.code != 200
+      Rails.logger.info "AAAAAAAAAAAAAA"
+      Rails.logger.info result.code
+      Rails.logger.info "AAAAAAAAAAAAAA"
     puts result.parsed_response
     result = result.parsed_response
     bs = BaseStation.where(mcc: bs_info["mcc"], mnc: bs_info["mnc"], lac: bs_info["lac"], cellid: bs_info["cellid"]).first
@@ -124,7 +128,7 @@ class BaseStation
         end
       end
     when 1
-      data.scan(/R:(.*?)(E|\z)/).each do |e|
+      data.scan(/R:(.*?)(EN|\z)/).each do |e|
         bs_data = e[0].split(',')
         next if bs_data[0].blank? || bs_data[0].to_i == 0 || bs_data[3].blank?
         bs_ss << {mcc: bs_data[0].to_i,
