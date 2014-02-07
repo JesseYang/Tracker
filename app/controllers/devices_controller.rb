@@ -3,7 +3,7 @@ class DevicesController < ApplicationController
   before_filter :require_sign_in
 
   def index
-    @devices = current_user.devices
+    @devices = current_user.admin ? Device.all : current_user.devices
   end
 
   def show_map
