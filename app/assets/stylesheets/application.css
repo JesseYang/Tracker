@@ -12,6 +12,7 @@
  *= require bootstrap
  *= require bootstrap-theme
  *= require bootstrap-datetimepicker
+ *= require jquery.jesse.notification
  */
 
 .hide {

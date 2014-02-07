@@ -4,11 +4,20 @@ class ApplicationController < ActionController::Base
   helper_method :user_signed_in?, :user_admin?, :current_user
 
   def require_sign_in
-    redirect_to :root if current_user.blank?
+    respond_to do |format|
+      format.html do
+        redirect_to new_user_session_path and return if current_user.blank?
+      end
+      format.json do
+        if current_user.blank?
+          render json: { success: false, reason: "require sign in" } and return
+        end
+      end
+    end
   end
 
   def require_admin
-    redirect_to :root if current_user.try(:admin) != true
+    redirect_to new_user_session_path if current_user.try(:admin) != true
   end
 
   def after_sign_in_path_for(resource)

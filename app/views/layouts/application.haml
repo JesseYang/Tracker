@@ -7,6 +7,11 @@
     = yield :app_head
     = csrf_meta_tags
   %body
+    #app-notification.jesse-notification
+      - if @flash.present?
+        %span= @flash
+      - else
+        %span= (flash.map { |name, msg| msg }).join(', ')
     #wrap
       .navbar.navbar-default{role: "navigation"}
         .navbar-header
@@ -46,11 +51,6 @@
                     %a{href: "/users/sign_in"} 登录
                   %li
                     %a{href: "/users/sign_up"} 注册
-      .container
-        - flash.each do |name, msg|
-          %div{:class => "alert alert-#{ name == :notice ? "success" : "danger" }"}
-            %button{type: "button", class: "close", "aria-hidden" => "true", data: {dismiss: "alert"}} &times;
-            = msg
       = yield
       #push
     #footer
