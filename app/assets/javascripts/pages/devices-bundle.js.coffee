@@ -14,8 +14,8 @@ $ ->
 
   $("form").submit ->
     device_id = $(this).find("select").val()
-    start_time = $(this).find("#start_input").val()
-    end_time = $(this).find("#end_input").val()
+    start_time = $(this).find("#start_input_shown").val()
+    end_time = $(this).find("#end_input_shown").val()
     window.location.href = "/devices/#{device_id}/show_map?start_time=#{start_time}&end_time=#{end_time}"
     return false
 
@@ -31,8 +31,10 @@ $ ->
       '/devices/' + window.device_id + '/show_map.json',
       { demo: window.demo,
       log_index: demo_log_index,
-      start_time: $("#start_input_shown").val(),
-      end_time: $("#end_input_shown").val() },
+      # start_time: $("#start_input_shown").val(),
+      start_time: window.start_str,
+      # end_time: $("#end_input_shown").val() },
+      end_time: window.end_str },
       (retval) ->
         if window.demo == "true"
           demo_log_index += 1
@@ -59,8 +61,10 @@ $ ->
       })
       log_overlay.push polyline
 
-      if start_marker != null
+      if start_marker != null && logs.length > 0
         start_marker.setVisible(true)
+      else
+        start_marker.setVisible(false)
       if end_marker != null
         end_marker.setVisible(false) # hide the previous marker
       if logs.length > 0
@@ -95,7 +99,6 @@ $ ->
             map: map
         });
         log_overlay.push circle
-    console.log log_overlay.length
 
   initialize = ->
     center = new soso.maps.LatLng(window.center[0], window.center[1])
