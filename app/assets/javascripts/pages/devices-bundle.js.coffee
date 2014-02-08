@@ -6,9 +6,11 @@ $ ->
   anchor = new soso.maps.Point(10, 30)
   end_marker = null
   start_marker = null
-  interval = 1000
+  interval = 5000
   demo_log_index = 2
-  log_length = 0
+  log_overlay = []
+  logs = []
+  current_type = "path"
   updateLog = -> 
     # use ajax to get the logs and refresh the map
     $.getJSON(
@@ -20,35 +22,44 @@ $ ->
       (retval) ->
         if window.demo == "true"
           demo_log_index += 1
-        path = []
-        for log in retval.logs
-          path.push(new soso.maps.LatLng(log.lat_offset, log.lng_offset))
-        if log_length != retval.logs.length
-          polyline = new soso.maps.Polyline({
-            path: path,
-            strokeColor: '#000000',
-            strokeWeight: 5,
-            editable:false,
-            map: map
-          })
-
-          end_marker.setVisible(false) # hide the previous marker
-          end_log = retval.logs[retval.logs.length-1]
-          end_p = new soso.maps.LatLng(end_log.lat_offset, end_log.lng_offset);
-          end_marker = new soso.maps.Marker({
-            position: end_p,
-            map: map
-          });
-          end_icon =  new soso.maps.MarkerImage(
-            "/assets/end.png", 
-            size,
-            origin,
-            anchor
-          );
-          end_marker.setIcon(end_icon);
-        log_length = retval.logs.length
+        logs = retval.logs
+        plotLogs(logs, "path")
     ) 
     setTimeout(updateLog, interval)
+
+  plotLogs = (logs, type) ->
+    if type == "path"
+      for overlay in log_overlay
+        overlay.setVisible(false)
+      overlay = []
+      path = []
+      for log in logs
+        path.push(new soso.maps.LatLng(log.lat_offset, log.lng_offset))
+      polyline = new soso.maps.Polyline({
+        path: path,
+        strokeColor: '#000000',
+        strokeWeight: 5,
+        editable:false,
+        map: map
+      })
+      overlay.push polyline
+
+      end_marker.setVisible(false) # hide the previous marker
+      end_log = logs[logs.length-1]
+      end_p = new soso.maps.LatLng(end_log.lat_offset, end_log.lng_offset);
+      end_marker = new soso.maps.Marker({
+        position: end_p,
+        map: map
+      });
+      end_icon =  new soso.maps.MarkerImage(
+        "/assets/end.png", 
+        size,
+        origin,
+        anchor
+      );
+      end_marker.setIcon(end_icon);
+      log_length = logs.length
+
 
   initialize = ->
     center = new soso.maps.LatLng(window.center[0], window.center[1])

@@ -18,7 +18,7 @@
 .input_area
   = form_tag({controller: "devices", action: "show_map"}, method: "get") do
     .form-group
-      = label_tag :name, "起始时间"
+      = label_tag :name, "时间范围"
       .input-group.date.form_datetime.col-md-12{"data-date" => "", "data-date-format" => "yyyy/mm/dd - HH:ii p", "data-link-field" => "start_input"}
         %input#start_input_shown.form-control{readonly: "readonly", name: "start_time", size: "12", type: "text", value: ""}/
         %span.input-group-addon
@@ -27,7 +27,6 @@
           %span.glyphicon.glyphicon-th
       %input#start_input{type: "hidden", value: ""}/
     .form-group
-      = label_tag :name, "终止时间"
       .input-group.date.form_datetime.col-md-12{"data-date" => "", "data-date-format" => "yyyy/mm/dd - HH:ii p", "data-link-field" => "end_input"}
         %input#end_input_shown.form-control{readonly: "readonly", name: "end_time", size: "12", type: "text", value: ""}/
         %span.input-group-addon
@@ -39,8 +38,8 @@
       = label_tag :name, "选择设备"
       = select_tag :id, options_from_collection_for_select(@devices, "id", "name", @device.id), class: "form-control"
     = submit_tag "确定", :class => 'btn-primary btn'
-  = link_to "查看日志列表", { controller: "logs", action: "index", device_id: @device._id.to_s }, :class => 'btn btn-default btn-xs'
+  = link_to "日志列表", { controller: "logs", action: "index", device_id: @device._id.to_s }, :class => 'btn btn-default btn-xs'
   - if @demo
     = link_to "返回", { controller: "devices", action: "show_map", id: @device._id.to_s, demo: false }, :class => 'btn btn-default btn-xs'
   - else
-    = link_to "动态加载演示", { controller: "devices", action: "show_map", id: @device._id.to_s, demo: true }, :class => 'btn btn-default btn-xs'
+    = link_to "动态演示", { controller: "devices", action: "show_map", id: @device._id.to_s, demo: true }, :class => 'btn btn-default btn-xs'
