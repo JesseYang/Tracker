@@ -6,7 +6,7 @@ $ ->
   anchor = new soso.maps.Point(10, 30)
   end_marker = null
   start_marker = null
-  interval = 5000
+  interval = 1000
   demo_log_index = 2
   log_overlay = []
   logs = []
@@ -148,6 +148,7 @@ $ ->
       editable:false,
       map: map
     })
+    log_overlay.push polyline
 
     setTimeout(updateLog, interval)
 
