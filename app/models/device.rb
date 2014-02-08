@@ -11,6 +11,7 @@ class Device
 
   belongs_to :user
   has_many :logs
+  has_many :fences
 
   def self.find_by_id(device_id)
     return self.where(id: device_id).first

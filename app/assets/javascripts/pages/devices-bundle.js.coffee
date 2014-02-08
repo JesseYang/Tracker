@@ -19,11 +19,11 @@ $ ->
     window.location.href = "/devices/#{device_id}/show_map?start_time=#{start_time}&end_time=#{end_time}"
     return false
 
-  $(".circle").click ->
-    console.log 'aaa'
+  $("#circle").click ->
+    plotLogs("circle")
 
-  $(".polyline").click ->
-    console.log 'bbb'
+  $("#polyline").click ->
+    plotLogs("path")
 
   updateLog = -> 
     # use ajax to get the logs and refresh the map
@@ -37,15 +37,16 @@ $ ->
         if window.demo == "true"
           demo_log_index += 1
         logs = retval.logs
-        plotLogs(logs, "path")
+        plotLogs(current_type)
     ) 
     setTimeout(updateLog, interval)
 
-  plotLogs = (logs, type) ->
+  plotLogs = (type) ->
+    current_type = type
     if type == "path"
       for overlay in log_overlay
         overlay.setVisible(false)
-      overlay = []
+      log_overlay = []
       path = []
       for log in logs
         path.push(new soso.maps.LatLng(log.lat_offset, log.lng_offset))
@@ -56,24 +57,45 @@ $ ->
         editable:false,
         map: map
       })
-      overlay.push polyline
+      log_overlay.push polyline
 
-      end_marker.setVisible(false) # hide the previous marker
-      end_log = logs[logs.length-1]
-      end_p = new soso.maps.LatLng(end_log.lat_offset, end_log.lng_offset);
-      end_marker = new soso.maps.Marker({
-        position: end_p,
-        map: map
-      });
-      end_icon =  new soso.maps.MarkerImage(
-        "/assets/end.png", 
-        size,
-        origin,
-        anchor
-      );
-      end_marker.setIcon(end_icon);
-      log_length = logs.length
-
+      if start_marker != null
+        start_marker.setVisible(true)
+      if end_marker != null
+        end_marker.setVisible(false) # hide the previous marker
+      if logs.length > 0
+        end_log = logs[logs.length-1]
+        end_p = new soso.maps.LatLng(end_log.lat_offset, end_log.lng_offset);
+        end_marker = new soso.maps.Marker({
+          position: end_p,
+          map: map
+        });
+        end_icon =  new soso.maps.MarkerImage(
+          "/assets/end.png", 
+          size,
+          origin,
+          anchor
+        );
+        end_marker.setIcon(end_icon);
+    else if type == "circle"
+      for overlay in log_overlay
+        overlay.setVisible(false)
+      log_overlay = []
+      if start_marker
+        start_marker.setVisible(false)
+      if end_marker
+        end_marker.setVisible(false)
+      for log in logs
+        # plot a circle with radius 100 meters
+        circle = new soso.maps.Circle({
+            center: new soso.maps.LatLng(log.lat_offset, log.lng_offset),
+            radius: 100,
+            fillColor: new soso.maps.Color(0,0,255,0.2),
+            strokeWeight: 0,
+            map: map
+        });
+        log_overlay.push circle
+    console.log log_overlay.length
 
   initialize = ->
     center = new soso.maps.LatLng(window.center[0], window.center[1])
@@ -118,6 +140,7 @@ $ ->
     for log in logs
       log = log.split(',')
       path.push(new soso.maps.LatLng(log[0], log[1]))
+      logs.push({lat_offset: log[0], lng_offset: log[1]})
     polyline = new soso.maps.Polyline({
       path: path,
       strokeColor: '#000000',

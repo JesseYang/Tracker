@@ -12,6 +12,8 @@
  *= require bootstrap
  *= require bootstrap-theme
  *= require bootstrap-datetimepicker
+ *= require bootstrap-switch
+ *= require prism
  *= require jquery.jesse.notification
  */
 

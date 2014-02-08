@@ -13,6 +13,11 @@ Tracker::Application.routes.draw do
         delete :clear
       end
     end
+    resources :fences do
+      member do
+        post :enable
+      end
+    end
   end
 
   resources :logs do

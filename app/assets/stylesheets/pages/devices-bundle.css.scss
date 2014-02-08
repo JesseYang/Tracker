@@ -1,5 +1,6 @@
 $black: #000000;
 $white: #ffffff;
+$blue: #2599e9;
 
 #info {
   width: 603px;
@@ -8,6 +9,32 @@ $white: #ffffff;
 }
 .btn {
   width: 80px;
+}
+.log-style-div {
+  position: absolute;
+  z-index: 2;
+  right: 5px;
+  top: 110px;
+  height: auto;
+  #polyline {
+    width: 40px;
+    height: 22px;
+    padding: 0px;
+    font-size: 13px;
+    border-width: 0px;
+  }
+  #circle {
+    width: 40px;
+    height: 22px;
+    padding: 0px;
+    font-size: 13px;
+    border-width: 0px;
+  }
+  box-shadow: 0px 5px 5px rgba(0,0,0,.6);
+  .active {
+    background-color: $blue;
+    color: $white;
+  }
 }
 .input_area {
   position: absolute;
@@ -36,6 +63,6 @@ $white: #ffffff;
 }
 #container {
   width: 100%;
-  height: 600px;
+  height: 700px;
+  margin-top: -20px;
 }
-

@@ -1,0 +1,28 @@
+- content_for :app_head do
+  = javascript_include_tag "pages/fences-bundle"
+  = stylesheet_link_tag "pages/fences-bundle", :media => "all"
+
+.container
+  .col-sm-8.col-sm-offset-2
+    - if @fences.blank?
+      %h4
+        没有符合条件的电子围栏,
+    - else
+      .table-responsive
+        %table#fence-table.table.table-striped
+          %tr 
+            %th 名称
+            %th 创建时间
+            %th.enable-column 生效
+          - @fences.each do |f|
+            %tr               
+              %td
+                = link_to f.name, device_fence_path(@device, f)
+              %td= f.created_at
+              %td.enable-column
+                - if f.enabled
+                  %input.enable-checkbox{data: {"fence-id" => f.id.to_s, "device-id" => @device.id.to_s}, checked: "checked", name: "enable-checkbox", type: "checkbox"}/
+                - else
+                  %input.enable-checkbox{data: {"fence-id" => f.id.to_s, "device-id" => @device.id.to_s}, name: "enable-checkbox", type: "checkbox"}/
+
+    = link_to "返回设备列表", {controller: "devices", action: "index"}, :class => 'btn btn-default btn-xs'
