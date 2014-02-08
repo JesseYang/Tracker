@@ -1,7 +1,19 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :store_location
   helper_method :user_signed_in?, :user_admin?, :current_user
+
+  def store_location
+    # store last url - this is needed for post-login redirect to whatever the user last visited.
+    if (request.fullpath != "/users/sign_in" &&
+        request.fullpath != "/users/sign_up" &&
+        request.fullpath != "/users/password" &&
+        request.fullpath != "/users/sign_out" &&
+        !request.xhr?) # don't store ajax calls
+      session[:previous_url] = request.fullpath 
+    end
+  end
 
   def require_sign_in
     respond_to do |format|
@@ -21,7 +33,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-  	devices_path
+  	session[:previous_url] || devices_path
   end
 
   def user_sign_in?
