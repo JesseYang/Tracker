@@ -11,6 +11,20 @@ $ ->
   log_overlay = []
   logs = []
   current_type = "path"
+
+  $("form").submit ->
+    device_id = $(this).find("select").val()
+    start_time = $(this).find("#start_input").val()
+    end_time = $(this).find("#end_input").val()
+    window.location.href = "/devices/#{device_id}/show_map?start_time=#{start_time}&end_time=#{end_time}"
+    return false
+
+  $(".circle").click ->
+    console.log 'aaa'
+
+  $(".polyline").click ->
+    console.log 'bbb'
+
   updateLog = -> 
     # use ajax to get the logs and refresh the map
     $.getJSON(

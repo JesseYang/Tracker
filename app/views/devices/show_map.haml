@@ -16,7 +16,7 @@
 
 #container
 .input_area
-  = form_tag({controller: "devices", action: "show_map"}, method: "get") do
+  = form_tag({}, method: "get") do
     .form-group
       = label_tag :name, "时间范围"
       .input-group.date.form_datetime.col-md-12{"data-date" => "", "data-date-format" => "yyyy/mm/dd - HH:ii p", "data-link-field" => "start_input"}
@@ -43,3 +43,11 @@
     = link_to "返回", { controller: "devices", action: "show_map", id: @device._id.to_s, demo: false }, :class => 'btn btn-default btn-xs'
   - else
     = link_to "动态演示", { controller: "devices", action: "show_map", id: @device._id.to_s, demo: true }, :class => 'btn btn-default btn-xs'
+  .log-style-div
+    .log-style.btn-group{data: {toggle: "buttons"}}
+      %label.polyline.active.btn.btn-default.btn-xs
+        %input{name: "selectStyle", type: "radio"}>/
+        折线
+      %label.circle.btn.btn-default.btn-xs
+        %input{name: "selectStyle", type: "radio"}>/
+        圆形
