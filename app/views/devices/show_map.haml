@@ -43,7 +43,7 @@
     = link_to "返回", { controller: "devices", action: "show_map", id: @device._id.to_s, demo: false }, :class => 'btn btn-default btn-xs'
   - else
     = link_to "动态演示", { controller: "devices", action: "show_map", id: @device._id.to_s, demo: true }, :class => 'btn btn-default btn-xs'
-  .log-style-div
+  .log-style-div.hide
     .log-style.btn-group{data: {toggle: "buttons"}}
       %label.polyline.active.btn.btn-default.btn-xs
         %input{name: "selectStyle", type: "radio"}>/
