@@ -9,4 +9,3 @@
 
 $ ->
   $("#app-notification").notification()
-

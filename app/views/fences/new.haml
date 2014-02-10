@@ -18,5 +18,6 @@
           启用
       .edit-right-group
         %a#fence-reset.btn.btn-default{href: "#", "aria-hidden" => "true"} 重置
+        = link_to "返回", device_fences_path(@device) , :class => 'btn btn-default'
         %a#fence-ok.btn.btn-default.btn-primary{href: "#", data: {"device-id" => @device.id.to_s}, "aria-hidden" => "true"} 确定
   #map-div

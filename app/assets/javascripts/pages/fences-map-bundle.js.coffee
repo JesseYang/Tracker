@@ -104,6 +104,7 @@ $ ->
     )
 
   $("#fence-update").click ->
+    return if points.length == 0
     device_id = $(this).data("device-id")
     fence_id = $(this).data("fence-id")
     $.putJSON(
