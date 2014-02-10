@@ -63,7 +63,7 @@ $ ->
 
       if start_marker != null && logs.length > 0
         start_marker.setVisible(true)
-      else
+      else if start_marker != null
         start_marker.setVisible(false)
       if end_marker != null
         end_marker.setVisible(false) # hide the previous marker

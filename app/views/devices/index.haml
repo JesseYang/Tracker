@@ -20,6 +20,7 @@
                 = link_to "删除", { controller: "devices", action: "destroy", id: d._id.to_s }, :method => "delete", :class => 'btn btn-danger btn-xs'
                 = link_to "日志地图", { controller: "devices", action: "show_map", id: d._id.to_s }, :class => 'btn btn-default btn-xs'
                 = link_to "日志列表", { controller: "logs", action: "index", device_id: d._id.to_s }, :class => 'btn btn-default btn-xs'
+                = link_to "电子围栏", { controller: "fences", action: "index", device_id: d._id.to_s }, :class => 'btn btn-default btn-xs'
       %button.btn.btn-primary{data: {toggle: "modal", target: "#newDevice"} } 新设备
 
 #newDevice.modal.fade

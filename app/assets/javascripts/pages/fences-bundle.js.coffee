@@ -12,5 +12,3 @@ $ ->
       { enabled: value },
       (retval) ->
     )
-    console.log fence_id
-    console.log value

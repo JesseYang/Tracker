@@ -6,21 +6,17 @@
     window.center = ['#{@center[0]}', '#{@center[1]}']
     window.zoom = '#{@zoom}'
     window.action = '#{controller.action_name}'
-    window.points = "#{(@fence.points.map { |e| e.join(',') }).join('-')}"
 
 #container
   .edit-div
     .form-inline
       .edit-left-group
         #fence-name.form-group
-          %input{placeholder: "名称", type: "text", value: @fence.name, class: "form-control"}/
+          %input{placeholder: "名称", type: "text", class: "form-control"}/
         %label#fence-enabled.checkbox
-          - if @fence.enabled
-            %input{type: "checkbox", checked: "true"}/
-          - else
-            %input{type: "checkbox"}/
+          %input{type: "checkbox"}/
           启用
       .edit-right-group
         %a#fence-reset.btn.btn-default{href: "#", "aria-hidden" => "true"} 重置
-        %a#fence-update.btn.btn-default.btn-primary{href: "#", data: {"device-id" => @device.id.to_s, "fence-id" => @fence.id.to_s}, "aria-hidden" => "true"} 更新
+        %a#fence-ok.btn.btn-default.btn-primary{href: "#", data: {"device-id" => @device.id.to_s}, "aria-hidden" => "true"} 确定
   #map-div

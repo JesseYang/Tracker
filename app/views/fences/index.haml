@@ -13,7 +13,7 @@
           %tr 
             %th 名称
             %th 创建时间
-            %th.enable-column 生效
+            %th.enable-column 启用
           - @fences.each do |f|
             %tr               
               %td
@@ -25,4 +25,4 @@
                 - else
                   %input.enable-checkbox{data: {"fence-id" => f.id.to_s, "device-id" => @device.id.to_s}, name: "enable-checkbox", type: "checkbox"}/
 
-    = link_to "返回设备列表", {controller: "devices", action: "index"}, :class => 'btn btn-default btn-xs'
+    = link_to "创建电子围栏", {controller: "fences", action: "new"}, :class => 'btn btn-primary btn-sm'
