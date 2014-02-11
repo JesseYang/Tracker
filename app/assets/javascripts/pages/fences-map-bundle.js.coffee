@@ -29,6 +29,8 @@ $ ->
       map: map
     })
     overlay_ary.push polygon
+  else
+    $("#app-notification").notification(content: "左键取点，右键结束", delay: 10000)
 
   listener = qq.maps.event.addListener(map, "click", (event) ->
     console.log('您点击的位置为: [' + event.latLng.getLat() + ', ' + event.latLng.getLng() + ']');
@@ -84,6 +86,7 @@ $ ->
     for overlay in overlay_ary
       overlay.setVisible(false)
     status = 'plot'
+    $("#app-notification").notification(content: "左键取点，右键结束", delay: 10000)
     false
 
   $("#fence-ok").click ->
