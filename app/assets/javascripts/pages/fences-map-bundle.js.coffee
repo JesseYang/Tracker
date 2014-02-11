@@ -89,7 +89,14 @@ $ ->
     $("#app-notification").notification(content: "左键取点，右键结束", delay: 10000)
     false
 
+  $("#fence-name input").focus ->
+    $("#fence-name").removeClass("has-error")
+
   $("#fence-ok").click ->
+    if $("#fence-name input").val() == ""
+      $("#fence-name").addClass("has-error")
+      $("#app-notification").notification({content: "请输入电子围栏名称"})
+      return
     device_id = $(this).data("device-id")
     $.postJSON(
       '/devices/' + device_id + '/fences',
@@ -108,6 +115,10 @@ $ ->
 
   $("#fence-update").click ->
     return if points.length == 0
+    if $("#fence-name input").val() == ""
+      $("#fence-name").addClass("has-error")
+      $("#app-notification").notification({content: "请输入电子围栏名称"})
+      return
     device_id = $(this).data("device-id")
     fence_id = $(this).data("fence-id")
     $.putJSON(
