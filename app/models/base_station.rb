@@ -4,7 +4,8 @@ class BaseStation
   include Mongoid::Document
   include HTTParty
 
-  base_uri 'http://www.minigps.net'
+  # base_uri 'http://www.minigps.net'
+  base_uri 'http://www.minigps.org'
   format :json
 
   field :uniq_id, :type => Integer
@@ -74,6 +75,7 @@ class BaseStation
   def self.find_bs_by_info(bs_info)
     result = self.get("/l.do",
       {:query => {
+        :needaddress => 0,
         :c => bs_info["mcc"],
         :n => bs_info["mnc"],
         :a => bs_info["lac"],
