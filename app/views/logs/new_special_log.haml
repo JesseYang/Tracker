@@ -1,0 +1,12 @@
+.container
+  .col-sm-8.col-sm-offset-2.col-xs-10.col-xs-offset-1
+    = form_tag('/logs/create_special_log', method: "post") do
+      %h3 录入新日志
+      .form-group
+        = label_tag :name, "imei"
+        = text_field_tag "imei", "", autofocus: true, class: "form-control"
+      .form-group
+        = label_tag :imei, "data"
+        = text_field_tag "data", "", class: "form-control"
+      = submit_tag "创建", :class => 'btn-primary btn'
+

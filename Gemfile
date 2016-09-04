@@ -33,7 +33,7 @@ end
 
 gem 'libv8', '~> 3.16.14.3'
 gem 'jquery-rails', '~> 3.0.4'
-gem 'nokogiri', '~> 1.5.6'
+gem 'nokogiri'
 gem 'httparty', '~> 0.10.2'
 gem 'whenever', '~> 0.8.2', :require => false
 

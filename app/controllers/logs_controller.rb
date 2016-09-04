@@ -39,6 +39,23 @@ class LogsController < ApplicationController
     redirect_to :action => :index, :device_id => params[:device_id] and return
   end
 
+  def device_create_gps
+    device = Device.where(imei: params[:imei]).first
+    render :json => {
+      :success => false,
+      :value => "Device Not Found"
+    } and return if device.nil?
+    batch_log = device.batch_logs.where(:data_id => params[:data_id]).first
+    batch_log = BatchLog.create_new(device, params[:data_id]) if batch_log.blank?
+    ret = batch_log.push_data(params[:order], params[:data])
+    if ret
+      # data collection for this batch log has finished
+    else
+      # data is not complete
+    end
+    render text: 'ok' and return
+  end
+
   def device_create
     device = Device.where(imei: params[:imei]).first
     render :json => {
@@ -58,8 +75,40 @@ class LogsController < ApplicationController
       :value => ""
     } and return
   end
+
+  def new_special_log
+  end
+
+  def create_special_log
+    sl = SpecialLog.create(folder: params[:imei],
+      filename: "AT#{Time.now.strftime('%Y%m%d%H%M%S')}",
+      data: params[:data])
+    flash[:notice] = "创建成功"
+    redirect_to action: :list_special_logs and return
+  end
+
+  def delete_special_log
+    sp = SpecialLog.find(params[:id])
+    sp.destroy
+    flash[:notice] = "删除成功"
+    redirect_to action: :list_special_logs and return
+  end
+
+  def list_special_logs
+    @special_logs = SpecialLog.all
+  end
  
   def device_create_bs
+    if params[:type] == "A" || params[:type] == "a"
+      sl = SpecialLog.create(folder: params[:imei],
+        filename: "AT#{Time.now.strftime('%Y%m%d%H%M%S')}",
+        data: params[:data])
+      render :json => {
+        :success => true,
+        :value => ""
+      } and return
+    end
+
     device = Device.where(imei: params[:imei]).first
     render :json => {
       :success => false,

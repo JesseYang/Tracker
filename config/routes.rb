@@ -24,9 +24,15 @@ Tracker::Application.routes.draw do
     collection do
       post :device_create
       post :device_create_bs
+      post :device_create_gps
+      get :device_create_gps
+      get :list_special_logs
+      get :new_special_log
+      post :create_special_log
     end
     member do
       get :bs_detail
+      delete :delete_special_log
     end
   end
 

@@ -2,6 +2,13 @@
 #= require bootstrap-datetimepicker.zh-CN.js
 
 $ ->
+
+  $(".check-data").click ->
+    $("#showDataModal").modal("show")
+    $("#showDataModal .show-folder").html($(this).closest("tr").find(" .folder").html())
+    $("#showDataModal .show-filename").html($(this).closest("tr").find(" .filename").html())
+    $("#showDataModal .show-data").html($(this).closest("tr").attr("data-data"))
+
   $(".form_datetime").datetimepicker
     language:  'zh-CN',
     weekStart: 1
